@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchBobSpeed = 8f;
     [SerializeField] private float crouchBobAmount = 0.025f;
 
+    [Header("Параметры света")]
+    [SerializeField] private bool risingLight = false;
+
 
     private float cameraPitch;
 
@@ -78,18 +81,33 @@ public class PlayerController : MonoBehaviour
         HandleCrouch();
         headbobhandler();
         UpdateMovement();
+        if (risingLight == true)
+        {
+            flashlight.intensity += Time.deltaTime * 10;
+        }
         FlashlightHandler();
+
     }
 
     private void FlashlightHandler()
     {
-        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity == 3)
+        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity >= 3)
         {
             flashlight.intensity = 0;
+            risingLight = false;
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity == 0) flashlight.intensity = 3;
+        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity <= 3)
+        {
+            if (flashlight.intensity < 3)
+            {
+                risingLight = true;
+            }
+        }
+        if (flashlight.intensity >= 3) { 
+            risingLight = false;
+        }
     }
 
     private void headbobhandler()
