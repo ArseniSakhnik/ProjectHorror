@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchBobSpeed = 8f;
     [SerializeField] private float crouchBobAmount = 0.025f;
 
+
     private float cameraPitch;
 
     private CharacterController controller;
@@ -82,13 +83,13 @@ public class PlayerController : MonoBehaviour
 
     private void FlashlightHandler()
     {
-        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity == 4)
+        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity == 3)
         {
             flashlight.intensity = 0;
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity == 0) flashlight.intensity = 4;
+        if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity == 0) flashlight.intensity = 3;
     }
 
     private void headbobhandler()
