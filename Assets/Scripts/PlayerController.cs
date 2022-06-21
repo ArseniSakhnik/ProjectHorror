@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isSprintOnCooldown;
 
 
-    [Header("Параметры приседа")] [SerializeField]
-    private float crouchHeight = 1f;
+    [Header("Параметры приседа")] 
+    [SerializeField] private float crouchHeight = 1f;
 
     [SerializeField] private float standingHeight = 2.0f;
     [SerializeField] private float timeToCrouch = 0.3f;
@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
     public bool crouchmode;
 
 
-    [Header("Параметры покачивания")] [SerializeField]
-    private float walkBobSpeed = 14f;
+    [Header("Параметры покачивания")] 
+    [SerializeField] private float walkBobSpeed = 14f;
 
     [SerializeField] private float walkBobAmount = 0.02f;
     [SerializeField] private float sprintBobSpeed = 18f;
