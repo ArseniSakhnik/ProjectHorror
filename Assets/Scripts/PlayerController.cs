@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
         controller = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
         defaultXPos = playerCamera.transform.localPosition.x;
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
         var target = new Vector3(0f, 0f, 0f);
 
 
-        if (!isMoving && bobcooldown > 30)
+        if (!isMoving && bobcooldown > 300)
         {
             timer += Time.deltaTime * walkBobSpeed;
             target = new Vector3(
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        else if (controller.velocity.sqrMagnitude != 0)
+       else if (isMoving)
         {
             timer += Time.deltaTime * (IsCrouching ? crouchBobSpeed : isSprinted ? sprintBobSpeed : walkBobSpeed);
             playerCamera.transform.localPosition = new Vector3(
@@ -150,9 +151,13 @@ public class PlayerController : MonoBehaviour
 
         else
         {
-            timer = 0;
-            bobcooldown++;
-
+            if (playerCamera.transform.localPosition == new Vector3 (defaultXPos,defaultYPos, 0))
+            {
+                bobcooldown++;
+                timer = 0;
+                return;
+            }
+            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(defaultXPos, defaultYPos, 0), walkBobSpeed * Time.deltaTime);
         };
     }
 
