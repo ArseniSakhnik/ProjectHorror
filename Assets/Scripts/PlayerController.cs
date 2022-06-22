@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 3.5f; // sensetivity
     [SerializeField] private float walkSpeed = 6.0f; // speed
     [SerializeField] private float gravity = -13.0f; // gravity for fall
-    [SerializeField] [Range(0.0f, 0.5f)] private float moveSmoothTime = 0.3f; // smooth moving vector
-    [SerializeField] [Range(0.0f, 0.5f)] private float mouseSmoothTime = 0.03f; // smooth sense vector
+    [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.3f; // smooth moving vector
+    [SerializeField][Range(0.0f, 0.5f)] private float mouseSmoothTime = 0.03f; // smooth sense vector
     [SerializeField] private float sprintAccel = 2.0f;
     [SerializeField] private float sprintDuration = 10.0f;
 
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isSprintOnCooldown;
 
 
-    [Header("Параметры приседа")] 
+    [Header("Параметры приседа")]
     [SerializeField] private float crouchHeight = 1f;
 
     [SerializeField] private float standingHeight = 2.0f;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool crouchmode;
 
 
-    [Header("Параметры покачивания")] 
+    [Header("Параметры покачивания")]
     [SerializeField] private float walkBobSpeed = 14f;
     [SerializeField] private float bobcooldown = 0;
     [SerializeField] private float walkBobAmount = 0.02f;
@@ -67,8 +67,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        instance = this;
-
         controller = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
         defaultXPos = playerCamera.transform.localPosition.x;
@@ -77,6 +75,12 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+
+    void Awake()
+    { 
+        instance = this;
     }
 
     private void Update()
@@ -109,7 +113,8 @@ public class PlayerController : MonoBehaviour
                 risingLight = true;
             }
         }
-        if (flashlight.intensity >= 3) { 
+        if (flashlight.intensity >= 3)
+        {
             risingLight = false;
         }
     }
@@ -123,7 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             timer += Time.deltaTime * walkBobSpeed;
             target = new Vector3(
-            defaultXPos + Mathf.Sin(timer / 8) * walkBobAmount ,
+            defaultXPos + Mathf.Sin(timer / 8) * walkBobAmount,
             defaultYPos + Mathf.Sin(timer / 4) * walkBobAmount,
             playerCamera.transform.localPosition.z);
             playerCamera.transform.localPosition = target;
@@ -143,9 +148,9 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        else 
+        else
         {
-            timer = 0; 
+            timer = 0;
             bobcooldown++;
 
         };

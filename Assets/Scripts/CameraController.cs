@@ -24,10 +24,12 @@ public class CameraController : MonoBehaviour
     {
         if (Physics.Raycast(cam.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance))
         {
-            if (hit.collider.gameObject.layer == 6 && (currentInteractable == null))
+            if (hit.collider.gameObject.layer == 6 && (currentInteractable == null || hit.collider.gameObject.GetInstanceID() != currentInteractable.GetInstanceID()))
             {
 
                 hit.collider.TryGetComponent(out currentInteractable);
+
+
 
                 if (currentInteractable)
                 {

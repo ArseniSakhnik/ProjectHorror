@@ -6,6 +6,7 @@ public class DoorInteractable : Interactable
 {
     [SerializeField] private bool IsOpen = false;
     [SerializeField] private bool NeedKey = false;
+    [SerializeField] private float dot;
     private Animator anim;
 
     private void Start()
@@ -22,9 +23,11 @@ public class DoorInteractable : Interactable
         if (!NeedKey)
         {
             IsOpen = !IsOpen;
-            Vector3 doorTransformDirection = transform.TransformDirection(Vector3.forward);
+            Vector3 doorTransformDirection = transform.TransformDirection(Vector3.left);
             Vector3 playerTransformDirection = PlayerController.instance.transform.position - transform.position;
-            float dot = Vector3.Dot(doorTransformDirection, playerTransformDirection);
+            dot = Vector3.Dot(doorTransformDirection, playerTransformDirection);
+           
+
 
             anim.SetFloat("dot", dot);
             anim.SetBool("isOpen", IsOpen);
