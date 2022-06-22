@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Параметры покачивания")] 
     [SerializeField] private float walkBobSpeed = 14f;
-
+    [SerializeField] private float bobcooldown = 0;
     [SerializeField] private float walkBobAmount = 0.02f;
     [SerializeField] private float sprintBobSpeed = 18f;
     [SerializeField] private float sprintBobAmount = 0.04f;
@@ -115,18 +115,18 @@ public class PlayerController : MonoBehaviour
         var target = new Vector3(0f, 0f, 0f);
 
 
-        if (!isMoving)
+        if (!isMoving && bobcooldown > 30)
         {
-            target = new Vector3(
-                defaultXPos + Mathf.Sin(timer / 5) * walkBobAmount,
-                defaultYPos + Mathf.Sin(timer / 5) * walkBobAmount * 4,
-                playerCamera.transform.localPosition.z);
             timer += Time.deltaTime * walkBobSpeed;
+            target = new Vector3(
+            defaultXPos + Mathf.Sin(timer / 8) * walkBobAmount ,
+            defaultYPos + Mathf.Sin(timer / 4) * walkBobAmount,
+            playerCamera.transform.localPosition.z);
             playerCamera.transform.localPosition = target;
         }
 
 
-        if (isMoving)
+        else if (controller.velocity.sqrMagnitude != 0)
         {
             timer += Time.deltaTime * (IsCrouching ? crouchBobSpeed : isSprinted ? sprintBobSpeed : walkBobSpeed);
             playerCamera.transform.localPosition = new Vector3(
@@ -135,7 +135,16 @@ public class PlayerController : MonoBehaviour
                 defaultYPos + Mathf.Sin(timer) * (IsCrouching ? crouchBobAmount * 3 :
                     isSprinted ? sprintBobAmount * 4 : walkBobAmount * 3),
                 playerCamera.transform.localPosition.z);
+            bobcooldown = 0;
         }
+
+
+        else 
+        {
+            timer = 0; 
+            bobcooldown++;
+
+        };
     }
 
 
