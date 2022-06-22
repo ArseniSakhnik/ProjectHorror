@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     [SerializeField] private Transform playerCamera; // camera object
     [SerializeField] private Light flashlight; // camera object
     [SerializeField] private float mouseSensitivity = 3.5f; // sensetivity
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
+
         controller = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
         defaultXPos = playerCamera.transform.localPosition.x;
