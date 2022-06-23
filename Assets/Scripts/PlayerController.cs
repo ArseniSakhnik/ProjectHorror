@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMouseLook();
         HandleCrouch();
-        headbobhandler();
+        Headbobhandler();
         UpdateMovement();
         if (risingLight == true)
         {
@@ -120,9 +120,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void headbobhandler()
+    private void Headbobhandler()
     {
-        var target = new Vector3(0f, 0f, 0f);
+        Vector3 target;
 
 
         if (!isMoving && bobcooldown > 300)
@@ -185,6 +185,10 @@ public class PlayerController : MonoBehaviour
         {
             controller.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
             controller.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
+            if (crouchmode)
+            {
+                controller.transform.position = new Vector3(controller.transform.position.x, controller.transform.position.y + 0.1f, controller.transform.position.z);
+            }
             timeElapsed += Time.deltaTime;
             yield return null;
         }
