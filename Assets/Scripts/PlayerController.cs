@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController instance;
+    [SerializeField] public Inventory inventory; // field for inventory
 
     [SerializeField] private Transform playerCamera; // camera object
     [SerializeField] private Light flashlight; // camera object
@@ -67,7 +67,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        instance = this;
         controller = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
         defaultXPos = playerCamera.transform.localPosition.x;
@@ -79,27 +78,23 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void Awake()
-    { 
-        instance = this;
-    }
-
     private void Update()
     {
         UpdateMouseLook();
         HandleCrouch();
         Headbobhandler();
         UpdateMovement();
-        if (risingLight == true)
-        {
-            flashlight.intensity += Time.deltaTime * 10;
-        }
         FlashlightHandler();
 
     }
 
     private void FlashlightHandler()
     {
+        if (risingLight == true)
+        {
+            flashlight.intensity += Time.deltaTime * 10;
+        }
+
         if (Input.GetKeyDown(KeyCode.F) && flashlight.intensity >= 3)
         {
             flashlight.intensity = 0;
