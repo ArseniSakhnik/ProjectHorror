@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    [SerializeField] List<Item> inventoryItems = new();
+    [SerializeField] public List<Item> inventoryItems = new();
 
     // Start is called before the first frame update
     void Start() 
