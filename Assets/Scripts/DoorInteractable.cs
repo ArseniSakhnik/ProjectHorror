@@ -35,9 +35,10 @@ public class DoorInteractable : Interactable
             anim.SetBool("isOpen", IsOpen);
         }
 
-        else if (ctr.inventory.CheckItem(key))
+        else if (ctr.inventory.CheckItem(key) && NeedKey)
         {
             Debug.Log("Door Unlocked");
+            ctr.inventory.RemoveItem(key);
             NeedKey = false;
         }
 

@@ -5,7 +5,9 @@ public enum ItemType
 {
     Consumable,
     Note,
-    KeyItem
+    KeyItem,
+    Ammo,
+    Weapon
 
 }
 [CreateAssetMenu(fileName = "ItemData")]

@@ -5,12 +5,15 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    [SerializeField] List<Item> inventoryItems = new List<Item>();
+    [SerializeField] public List<Item> inventoryItems = new List<Item>();
 
     // Start is called before the first frame update
-    void Start()
+    void Start() 
     {
-        
+        foreach (var item in inventoryItems)
+        {
+            item.Quantity = 1;
+        }
     }
 
     // Update is called once per frame
@@ -21,12 +24,33 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        inventoryItems.Add(item);
+        if (inventoryItems.Contains(item))
+        {
+            inventoryItems[inventoryItems.IndexOf(item)].Quantity += 1;
+            Debug.Log("Quantity++");
+        }
+        else
+        {
+            inventoryItems.Add(item);
+            Debug.Log("Add");
+        }
     }
 
     public bool CheckItem(Item item)
     {
         return inventoryItems.Contains(item);
+    }
+
+    public void RemoveItem(Item item)
+    {
+        inventoryItems[inventoryItems.IndexOf(item)].Quantity -= 1;
+        Debug.Log("Quantity--");
+
+        if (inventoryItems[inventoryItems.IndexOf(item)].Quantity == 0)
+        {
+            inventoryItems.Remove(item);
+            Debug.Log("Remove");
+        }
     }
 
 }
