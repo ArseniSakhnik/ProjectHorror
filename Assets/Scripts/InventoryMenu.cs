@@ -29,10 +29,7 @@ public class InventoryMenu : MonoBehaviour
         ctr = GameObject.Find("Player").GetComponent<PlayerController>();
         inventory = ctr.inventory;
 
-        maxCells = inventory.inventoryItems.Count;              // set cells
-        centralcell = inventory.inventoryItems.Count / 2;
-        prevcell = centralcell - 1;
-        nextcell = centralcell + 1;
+       
 
         RefreshInventory();
 
@@ -40,9 +37,17 @@ public class InventoryMenu : MonoBehaviour
         NotesUI.SetActive(false);
     }
 
+    
+
     private void RefreshInventory()
     {
-
+        if (maxCells!=inventory.inventoryItems.Count)
+        {
+            maxCells = inventory.inventoryItems.Count;              // set cells
+            centralcell = inventory.inventoryItems.Count / 2;
+            prevcell = centralcell - 1;
+            nextcell = centralcell + 1;
+        }
 
         centerImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[centralcell].Icon; // set images
         prevImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[prevcell].Icon;
@@ -78,6 +83,7 @@ public class InventoryMenu : MonoBehaviour
     private void Update()
     {
         StartMenu();
+        RefreshInventory();
         if (isMenuInventory)
         {
             if (Input.GetKeyDown(KeyCode.D))
