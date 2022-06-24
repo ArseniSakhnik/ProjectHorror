@@ -8,9 +8,15 @@ public class InventoryMenu : MonoBehaviour
     public GameObject NotesUI;
     bool isMenuInventory = false;
     bool isMenuNotes = false;
+    [SerializeField] private PlayerController ctr;
+    [SerializeField] private Inventory inventory;
+    
 
     private void Start()
     {
+        ctr = GameObject.Find("Player").GetComponent<PlayerController>();
+        inventory = ctr.inventory;
+
         IntentoryUI.SetActive(false);
         NotesUI.SetActive(false);
     }
@@ -31,6 +37,7 @@ public class InventoryMenu : MonoBehaviour
                 {
                     isMenuNotes = !isMenuNotes;
                 }
+
             }
             if (isMenuInventory)
             {
@@ -38,6 +45,7 @@ public class InventoryMenu : MonoBehaviour
                 NotesUI.SetActive(false);
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
+            
                 Time.timeScale = 0f;
             }
             else if (isMenuNotes)

@@ -80,7 +80,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        UpdateMouseLook();
+        if (Time.timeScale !=0f)
+        {
+            UpdateMouseLook();
+        }
         HandleCrouch();
         Headbobhandler();
         UpdateMovement();
