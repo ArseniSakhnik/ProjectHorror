@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    [SerializeField] public List<Item> inventoryItems = new List<Item>();
+    [SerializeField] List<Item> inventoryItems = new();
 
     // Start is called before the first frame update
     void Start() 
@@ -14,12 +14,6 @@ public class Inventory : MonoBehaviour
         {
             item.Quantity = 1;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void AddItem(Item item)
