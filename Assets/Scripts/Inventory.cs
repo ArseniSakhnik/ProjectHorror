@@ -16,16 +16,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item, int amount = 1)
     {
         if (inventoryItems.Contains(item))
         {
-            inventoryItems[inventoryItems.IndexOf(item)].Quantity += 1;
+            inventoryItems[inventoryItems.IndexOf(item)].Quantity += amount;
             Debug.Log("Quantity++");
         }
         else
         {
             inventoryItems.Add(item);
+            inventoryItems[inventoryItems.IndexOf(item)].Quantity += amount;
             Debug.Log("Add");
         }
     }

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] public int playerHealth = 100; // health will not exceed 100
+
+
+
     [SerializeField] public Inventory inventory; // field for inventory
 
     [SerializeField] private Transform playerCamera; // camera object

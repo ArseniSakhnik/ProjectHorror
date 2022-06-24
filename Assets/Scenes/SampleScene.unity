@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.018744495, g: 0.022039877, b: 0.028246542, a: 1}
+  m_IndirectSpecularColor: {r: 0.018744525, g: 0.022039905, b: 0.02824659, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -780,7 +780,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24710
+  m_Name: pb_Mesh24084
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2289,7 +2289,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 891452037}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1706784872}
+        m_TargetAssemblyTypeName: InventoryMenu, Assembly-CSharp
+        m_MethodName: UseItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &891452037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9667,6 +9679,7 @@ MonoBehaviour:
   centralcell: 0
   nextcell: 0
   prevcell: 0
+  currentItem: {fileID: 0}
 --- !u!4 &1706784873
 Transform:
   m_ObjectHideFlags: 0
@@ -10348,6 +10361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d473df863bc074844b1a301c5b8edfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: 100
   inventory: {fileID: 1975547495}
   playerCamera: {fileID: 770238915}
   flashlight: {fileID: 985374306}
@@ -10960,7 +10974,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9179800922841617948}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 5.028, y: 0.8, z: 70.3}
+  m_LocalPosition: {x: 5.028, y: 1.99, z: 70.3}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.04974169}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10980,6 +10994,7 @@ GameObject:
   - component: {fileID: 4864238842778501891}
   - component: {fileID: 7234408542041061321}
   - component: {fileID: 9179800922841617949}
+  - component: {fileID: 9179800922841617951}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -10998,7 +11013,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 9e6555cc48194624b934fc8410b0c675, type: 3}
 --- !u!114 &9179800922841617950
@@ -11015,3 +11030,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a01283209855282418ed9ea1a1c8c025, type: 2}
   ctr: {fileID: 0}
+  amount: 1
+--- !u!54 &9179800922841617951
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9179800922841617948}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

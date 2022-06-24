@@ -20,6 +20,7 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] private int centralcell;
     [SerializeField] private int nextcell;
     [SerializeField] private int prevcell;
+    [SerializeField] private Item currentItem;
 
 
 
@@ -28,8 +29,6 @@ public class InventoryMenu : MonoBehaviour
     {
         ctr = GameObject.Find("Player").GetComponent<PlayerController>();
         inventory = ctr.inventory;
-
-       
 
         RefreshInventory();
 
@@ -80,10 +79,29 @@ public class InventoryMenu : MonoBehaviour
         }
     }
 
+    public void UseItem()
+    {
+        switch (centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text)
+        {
+            case "HealthDrink":                         // drink to restore health
+                ctr.playerHealth += 40;
+                if (ctr.playerHealth > 100)
+                {
+                    ctr.playerHealth = 100;
+                }
+                inventory.RemoveItem(inventory.inventoryItems[centralcell]);         
+                break;
+
+            default:
+                break;
+        }
+        RefreshInventory();
+    }
+
     private void Update()
     {
         StartMenu();
-        RefreshInventory();
+
         if (isMenuInventory)
         {
             if (Input.GetKeyDown(KeyCode.D))
@@ -98,12 +116,19 @@ public class InventoryMenu : MonoBehaviour
                 MoveLeft();
                 RefreshInventory();
             }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                UseItem();
+            }
         }
     }
+
+
     void StartMenu()
     {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
+                RefreshInventory();
                 if (isMenuNotes == false)
                 {
                     isMenuInventory = !isMenuInventory;
