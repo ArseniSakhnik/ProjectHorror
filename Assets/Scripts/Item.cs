@@ -8,7 +8,6 @@ public enum ItemType
     KeyItem,
     Ammo,
     Weapon
-
 }
 [CreateAssetMenu(fileName = "ItemData")]
 
@@ -19,7 +18,7 @@ public class Item : ScriptableObject
     public string Description = "Description";
     public int Quantity = 1;
     public ItemType Type;
-
+    public TextAsset File;
     public Sprite Icon;
 
 }

@@ -7,7 +7,7 @@ public class PickableItem : Interactable
     [SerializeField] Item item;
     [SerializeField] public PlayerController ctr;
     [SerializeField] public int amount;
-
+ 
 
     public override void OnFocus()
     {
@@ -20,6 +20,10 @@ public class PickableItem : Interactable
         ctr.inventory.AddItem(item, amount);
         StartCoroutine(ExecuteAfterTime(3));
         gameObject.transform.position = new Vector3(0,-100,0);
+        if (item.Type == ItemType.Note)
+        {
+            ctr.inventory.ReadNote(item);
+        }
     }
 
     public IEnumerator ExecuteAfterTime(float timeInSec)
