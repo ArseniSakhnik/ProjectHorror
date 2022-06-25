@@ -58,6 +58,7 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && currentInteractable !=null && Physics.Raycast(cam.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance, interactionLayer))
         {
             currentInteractable.OnInteract();
+            InteractIcon.SetActive(false);
         }
     }
 
