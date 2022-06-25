@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
+    public GameObject InteractIcon;
     [Header("Raycast")]
     [SerializeField] private bool canInteract = true;
     [SerializeField] private Vector3 interactionRayPoint = default;
@@ -30,10 +30,10 @@ public class CameraController : MonoBehaviour
                 hit.collider.TryGetComponent(out currentInteractable);
 
 
-
                 if (currentInteractable)
                 {
                     currentInteractable.OnFocus();
+                    InteractIcon.SetActive(true);
                 }
             }
         }
@@ -41,6 +41,7 @@ public class CameraController : MonoBehaviour
         {
             currentInteractable.OnLoseFocus();
             currentInteractable = null;
+            InteractIcon.SetActive(false);
         }
 
     }
