@@ -27,9 +27,8 @@ public class PickableItem : Interactable
         yield return new WaitForSeconds(timeInSec);
         if (GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text == "Picked Up <color=green>" + item.name + "</color>")
         {
-
+            GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "";
         }
-        GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "";
         Destroy(gameObject);
     }
 
