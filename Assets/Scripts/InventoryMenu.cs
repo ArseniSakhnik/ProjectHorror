@@ -21,7 +21,7 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] private int nextcell;
     [SerializeField] private int prevcell;
     [SerializeField] private Item currentItem;
-
+    [SerializeField] GameObject AmountText;
 
 
 
@@ -45,13 +45,15 @@ public class InventoryMenu : MonoBehaviour
             prevImage.SetActive(false);
             nextImage.SetActive(false);
             centerImage.SetActive(false);
-
+            AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
 
             centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             centerImageAmount.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             return;
         }
+
+        AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Количество:";
 
         if (maxCells!=inventory.inventoryItems.Count)
         {
@@ -139,6 +141,11 @@ public class InventoryMenu : MonoBehaviour
     {
         StartMenu();
 
+        if (inventory.inventoryItems.Count ==0)
+        {
+            return;
+        }
+
         if (isMenuInventory)
         {
             if (inventory.inventoryItems.Count != 1)
@@ -157,7 +164,7 @@ public class InventoryMenu : MonoBehaviour
                 }
             }
 
-            else if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 UseItem();
             }
