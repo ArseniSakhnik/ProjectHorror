@@ -25,7 +25,6 @@ public class Inventory : MonoBehaviour
     {
         int currentpage = 1;
 
-
         while (!Input.GetKeyDown(KeyCode.R))
         {
             pgc = GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().textInfo.pageCount;
@@ -43,16 +42,20 @@ public class Inventory : MonoBehaviour
             }
             yield return null;
         }
+
         GameObject.Find("Paper").SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NOTEUI.SetActive(false);
         Time.timeScale = 1f;
+        PlayerController.isblockInventory = false;
+        PlayerController.isblockInteraction = false;
     }
 
 
     public void ReadNote(Item item)
     {
+        if (PlayerController.isblockReading) return;
         NOTEUI.SetActive(true);
         string noteText = item.File.ToString();
         GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().text = noteText;
@@ -60,10 +63,8 @@ public class Inventory : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0f;
         StartCoroutine(ExitFromReading());
-    }
-
-    private void Update()
-    {
+        PlayerController.isblockInventory = true;
+        PlayerController.isblockInteraction = true;
     }
 
     public void AddItem(Item item, int amount = 1)

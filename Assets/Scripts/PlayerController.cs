@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("—Œ—“ŒﬂÕ»ﬂ")]
+    [SerializeField] public static bool isblockInventory = false;
+    [SerializeField] public static bool isblockInteraction = false;
+    [SerializeField] public static bool isblockReading = false;
+
+
     [SerializeField] public int playerHealth = 100; // health will not exceed 100
-
-
 
     [SerializeField] public Inventory inventory; // field for inventory
 

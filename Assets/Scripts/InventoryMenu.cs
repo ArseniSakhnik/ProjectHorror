@@ -91,9 +91,6 @@ public class InventoryMenu : MonoBehaviour
             nextImage.SetActive(true);
         }
 
-
-
-
     }
 
     public void MoveRight()
@@ -139,6 +136,11 @@ public class InventoryMenu : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerController.isblockInventory)
+        {
+            return;
+
+        }
         StartMenu();
 
         if (inventory.inventoryItems.Count ==0)
@@ -176,7 +178,9 @@ public class InventoryMenu : MonoBehaviour
     {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                RefreshInventory();
+            PlayerController.isblockInteraction = true;
+            PlayerController.isblockReading = true;
+            RefreshInventory();
                 if (isMenuNotes == false)
                 {
                     isMenuInventory = !isMenuInventory;
@@ -211,7 +215,10 @@ public class InventoryMenu : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Time.timeScale = 1f;
-            }
+                PlayerController.isblockInteraction = false;
+                PlayerController.isblockReading = false;
+
+        }
     }
 
     // ExitButton

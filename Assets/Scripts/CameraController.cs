@@ -68,7 +68,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canInteract)
+        if (!PlayerController.isblockInteraction)
         {
             HandleInterationCheck();
             HandleInterationInput();
