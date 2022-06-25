@@ -40,6 +40,19 @@ public class InventoryMenu : MonoBehaviour
 
     private void RefreshInventory()
     {
+        if (inventory.inventoryItems.Count == 0)
+        {
+            prevImage.SetActive(false);
+            nextImage.SetActive(false);
+            centerImage.SetActive(false);
+
+
+            centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+            centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+            centerImageAmount.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+            return;
+        }
+
         if (maxCells!=inventory.inventoryItems.Count)
         {
             maxCells = inventory.inventoryItems.Count;              // set cells
@@ -49,12 +62,36 @@ public class InventoryMenu : MonoBehaviour
         }
 
         centerImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[centralcell].Icon; // set images
-        prevImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[prevcell].Icon;
-        nextImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[nextcell].Icon;
-
         centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.inventoryItems[centralcell].name;
         centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.inventoryItems[centralcell].Description;
         centerImageAmount.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.inventoryItems[centralcell].Quantity.ToString();
+
+        if (maxCells!=1)
+        {
+            if (maxCells==2)
+            {
+                nextcell = prevcell;
+            }
+            prevImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[prevcell].Icon;
+            nextImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[nextcell].Icon;
+        }
+
+        if (maxCells == 1)
+        {
+            centerImage.SetActive(true);
+            prevImage.SetActive(false);
+            nextImage.SetActive(false);
+        }
+        else
+        {
+            centerImage.SetActive(true);
+            prevImage.SetActive(true);
+            nextImage.SetActive(true);
+        }
+
+
+
+
     }
 
     public void MoveRight()
@@ -104,18 +141,22 @@ public class InventoryMenu : MonoBehaviour
 
         if (isMenuInventory)
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            if (inventory.inventoryItems.Count != 1)
             {
-                Debug.Log("VPravo");
-                MoveRight();
-                RefreshInventory();
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    Debug.Log("VPravo");
+                    MoveRight();
+                    RefreshInventory();
+                }
+                else if (Input.GetKeyDown(KeyCode.A))
+                {
+                    Debug.Log("VPLevo");
+                    MoveLeft();
+                    RefreshInventory();
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.A))
-            {
-                Debug.Log("VPLevo");
-                MoveLeft();
-                RefreshInventory();
-            }
+
             else if (Input.GetKeyDown(KeyCode.E))
             {
                 UseItem();
