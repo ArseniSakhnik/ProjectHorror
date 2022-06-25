@@ -22,6 +22,13 @@ public class CameraController : MonoBehaviour
 
     private void HandleInterationCheck()
     {
+
+        if (currentInteractable != null)
+        {
+            currentInteractable.OnLoseFocus();
+            InteractIcon.SetActive(false);
+        }
+
         if (Physics.Raycast(cam.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance))
         {
             if (hit.collider.gameObject.layer == 6 && (currentInteractable == null || hit.collider.gameObject.GetInstanceID() != currentInteractable.GetInstanceID()))
