@@ -130,6 +130,7 @@ public class InventoryMenu : MonoBehaviour
         {
             PlayerController.isblockReading = false;
             PlayerController.isblockInventory = true;
+            IntentoryUI.SetActive(false);
             inventory.ReadNote(itemList[centralcell]);
         }
 
@@ -210,7 +211,6 @@ public class InventoryMenu : MonoBehaviour
         else
         {
             IntentoryUI.SetActive(false);
-            // NotesUI.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1f;
