@@ -22,6 +22,8 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] private int prevcell;
     [SerializeField] private Item currentItem;
     [SerializeField] GameObject AmountText;
+    [SerializeField] List<Item> itemList;
+
 
 
 
@@ -29,18 +31,21 @@ public class InventoryMenu : MonoBehaviour
     {
         ctr = GameObject.Find("Player").GetComponent<PlayerController>();
         inventory = ctr.inventory;
+        itemList = inventory.inventoryItems;
 
         RefreshInventory();
 
         IntentoryUI.SetActive(false);
-        NotesUI.SetActive(false);
     }
 
-    
+
 
     private void RefreshInventory()
     {
-        if (inventory.inventoryItems.Count == 0)
+
+
+
+        if (itemList.Count == 0 )
         {
             prevImage.SetActive(false);
             nextImage.SetActive(false);
@@ -55,27 +60,28 @@ public class InventoryMenu : MonoBehaviour
 
         AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Количество:";
 
-        if (maxCells!=inventory.inventoryItems.Count)
+        if (maxCells != itemList.Count)
         {
-            maxCells = inventory.inventoryItems.Count;              // set cells
-            centralcell = inventory.inventoryItems.Count / 2;
+            maxCells = itemList.Count;              // set cells
+            centralcell = itemList.Count / 2;
             prevcell = centralcell - 1;
             nextcell = centralcell + 1;
         }
 
-        centerImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[centralcell].Icon; // set images
-        centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.inventoryItems[centralcell].name;
-        centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.inventoryItems[centralcell].Description;
-        centerImageAmount.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.inventoryItems[centralcell].Quantity.ToString();
 
-        if (maxCells!=1)
+        centerImage.GetComponent<UnityEngine.UI.Image>().sprite = itemList[centralcell].Icon; // set images
+        centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].name;
+        centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].Description;
+        centerImageAmount.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].Quantity.ToString();
+
+        if (maxCells != 1)
         {
-            if (maxCells==2)
+            if (maxCells == 2)
             {
                 nextcell = prevcell;
             }
-            prevImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[prevcell].Icon;
-            nextImage.GetComponent<UnityEngine.UI.Image>().sprite = inventory.inventoryItems[nextcell].Icon;
+            prevImage.GetComponent<UnityEngine.UI.Image>().sprite = itemList[prevcell].Icon;
+            nextImage.GetComponent<UnityEngine.UI.Image>().sprite = itemList[nextcell].Icon;
         }
 
         if (maxCells == 1)
@@ -95,6 +101,7 @@ public class InventoryMenu : MonoBehaviour
 
     public void MoveRight()
     {
+
         prevcell = centralcell;
         centralcell = nextcell;
         nextcell++;
@@ -102,6 +109,7 @@ public class InventoryMenu : MonoBehaviour
         {
             nextcell = 0;
         }
+        RefreshInventory();
     }
 
     public void MoveLeft()
@@ -111,12 +119,20 @@ public class InventoryMenu : MonoBehaviour
         prevcell--;
         if (prevcell < 0)
         {
-            prevcell = maxCells-1;
+            prevcell = maxCells - 1;
         }
+        RefreshInventory();
     }
 
     public void UseItem()
     {
+        if (itemList[centralcell].Type == ItemType.Note)
+        {
+            PlayerController.isblockReading = false;
+            PlayerController.isblockInventory = true;
+            inventory.ReadNote(itemList[centralcell]);
+        }
+
         switch (centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text)
         {
             case "HealthDrink":                         // drink to restore health
@@ -125,7 +141,7 @@ public class InventoryMenu : MonoBehaviour
                 {
                     ctr.playerHealth = 100;
                 }
-                inventory.RemoveItem(inventory.inventoryItems[centralcell]);         
+                inventory.RemoveItem(itemList[centralcell]);
                 break;
 
             default:
@@ -143,26 +159,22 @@ public class InventoryMenu : MonoBehaviour
         }
         StartMenu();
 
-        if (inventory.inventoryItems.Count ==0)
+        if (inventory.inventoryItems.Count == 0) // если ноль то ничего не прожимаем
         {
             return;
         }
 
-        if (isMenuInventory)
+        if (isMenuInventory || isMenuNotes)
         {
             if (inventory.inventoryItems.Count != 1)
             {
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    Debug.Log("VPravo");
                     MoveRight();
-                    RefreshInventory();
                 }
                 else if (Input.GetKeyDown(KeyCode.A))
                 {
-                    Debug.Log("VPLevo");
                     MoveLeft();
-                    RefreshInventory();
                 }
             }
 
@@ -176,52 +188,39 @@ public class InventoryMenu : MonoBehaviour
 
     void StartMenu()
     {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
             PlayerController.isblockInteraction = true;
             PlayerController.isblockReading = true;
             RefreshInventory();
-                if (isMenuNotes == false)
-                {
-                    isMenuInventory = !isMenuInventory;
-                }
-                if (isMenuNotes == true)
-                {
-                    isMenuNotes = !isMenuNotes;
-                }
+            if (isMenuNotes == false)
+            {
+                isMenuInventory = !isMenuInventory;
+            }
 
-            }
-            if (isMenuInventory)
-            {
-                IntentoryUI.SetActive(true);
-                NotesUI.SetActive(false);
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-            
-                Time.timeScale = 0f;
-            }
-            else if (isMenuNotes)
-            {
-                NotesUI.SetActive(true);
-                IntentoryUI.SetActive(false);
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                IntentoryUI.SetActive(false);
-                NotesUI.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                Time.timeScale = 1f;
-                PlayerController.isblockInteraction = false;
-                PlayerController.isblockReading = false;
+        }
+        if (isMenuInventory || isMenuNotes)
+        {
+            IntentoryUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+        }
+
+        else
+        {
+            IntentoryUI.SetActive(false);
+            // NotesUI.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
+            PlayerController.isblockInteraction = false;
+            PlayerController.isblockReading = false;
 
         }
     }
 
-    // ExitButton
+    // Методы для инспектора
     public void MenuUnpause()
     {
         isMenuInventory = false;
@@ -229,11 +228,17 @@ public class InventoryMenu : MonoBehaviour
     }
     public void SetInventory()
     {
+        itemList = inventory.inventoryItems;
+        RefreshInventory();
+
         isMenuInventory = true;
         isMenuNotes = false;
     }
     public void SetNotes()
     {
+        itemList = inventory.notesItems;
+        RefreshInventory();
+
         isMenuInventory = false;
         isMenuNotes = true;
     }

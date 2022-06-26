@@ -62,9 +62,10 @@ public class Inventory : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Time.timeScale = 0f;
-        StartCoroutine(ExitFromReading());
         PlayerController.isblockInventory = true;
         PlayerController.isblockInteraction = true;
+        StartCoroutine(ExitFromReading());
+
     }
 
     public void AddItem(Item item, int amount = 1)

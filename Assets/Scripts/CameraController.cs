@@ -6,7 +6,6 @@ public class CameraController : MonoBehaviour
 {
     public GameObject InteractIcon;
     [Header("Raycast")]
-    [SerializeField] private bool canInteract = true;
     [SerializeField] private Vector3 interactionRayPoint = default;
     [SerializeField] private float interactionDistance = 1f;
     [SerializeField] private LayerMask interactionLayer = default;
