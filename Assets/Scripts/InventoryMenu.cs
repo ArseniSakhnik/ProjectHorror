@@ -153,12 +153,14 @@ public class InventoryMenu : MonoBehaviour
 
     private void Update()
     {
+
+        StartMenu();
+
         if (PlayerController.isblockInventory)
         {
             return;
 
         }
-        StartMenu();
 
         if (inventory.inventoryItems.Count == 0) // если ноль то ничего не прожимаем
         {
@@ -198,6 +200,10 @@ public class InventoryMenu : MonoBehaviour
             {
                 isMenuInventory = !isMenuInventory;
             }
+            if (isMenuNotes == true)
+            {
+                isMenuNotes = !isMenuNotes;
+            }
 
         }
         if (isMenuInventory || isMenuNotes)
@@ -229,17 +235,17 @@ public class InventoryMenu : MonoBehaviour
     public void SetInventory()
     {
         itemList = inventory.inventoryItems;
-        RefreshInventory();
-
         isMenuInventory = true;
         isMenuNotes = false;
+        RefreshInventory();
+
     }
     public void SetNotes()
     {
         itemList = inventory.notesItems;
-        RefreshInventory();
-
         isMenuInventory = false;
         isMenuNotes = true;
+        RefreshInventory();
+
     }
 }
