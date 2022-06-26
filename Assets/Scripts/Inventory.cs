@@ -43,13 +43,15 @@ public class Inventory : MonoBehaviour
             yield return null;
         }
 
-        GameObject.Find("Paper").SetActive(false);
+        GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().pageToDisplay = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NOTEUI.SetActive(false);
         Time.timeScale = 1f;
         PlayerController.isblockInventory = false;
         PlayerController.isblockInteraction = false;
+        GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().text = "";
+
     }
 
 
@@ -65,6 +67,8 @@ public class Inventory : MonoBehaviour
         PlayerController.isblockInventory = true;
         PlayerController.isblockInteraction = true;
         StartCoroutine(ExitFromReading());
+        Debug.Log(item);
+
 
     }
 
