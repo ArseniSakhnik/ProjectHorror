@@ -46,11 +46,11 @@ public class Inventory : MonoBehaviour
         GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().pageToDisplay = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().text = "";
         NOTEUI.SetActive(false);
         Time.timeScale = 1f;
         PlayerController.isblockInventory = false;
         PlayerController.isblockInteraction = false;
-        GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().text = "";
 
     }
 
