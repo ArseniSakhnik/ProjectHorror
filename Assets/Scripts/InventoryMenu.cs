@@ -154,13 +154,15 @@ public class InventoryMenu : MonoBehaviour
     private void Update()
     {
 
-        StartMenu();
 
         if (PlayerController.isblockInventory)
         {
             return;
 
         }
+
+        StartMenu();
+
 
         if (inventory.inventoryItems.Count == 0) // если ноль то ничего не прожимаем
         {
