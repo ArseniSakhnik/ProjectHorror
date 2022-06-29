@@ -29,6 +29,8 @@ public class Inventory : MonoBehaviour
         {
             pgc = GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().textInfo.pageCount;
 
+            if (pgc > 1)    GameObject.Find("PageCounter").GetComponent<TMPro.TextMeshProUGUI>().text = currentpage + " / " + pgc;
+
             if (currentpage < pgc && Input.GetKeyDown(KeyCode.D))
             {
                 currentpage++;
@@ -47,6 +49,7 @@ public class Inventory : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         GameObject.Find("NotesText").GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        GameObject.Find("PageCounter").GetComponent<TMPro.TextMeshProUGUI>().text = "";
         NOTEUI.SetActive(false);
         Time.timeScale = 1f;
         PlayerController.isblockInventory = false;
