@@ -8791,12 +8791,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1483945846}
   - component: {fileID: 1483945845}
+  - component: {fileID: 1483945848}
   - component: {fileID: 1483945844}
   - component: {fileID: 1483945849}
-  - component: {fileID: 1483945848}
   - component: {fileID: 1483945843}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8874,7 +8874,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483945842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.17, y: 3.1, z: 51.3}
+  m_LocalPosition: {x: 19.17, y: 3.1, z: 32.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8893,12 +8893,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b5c8f6bdf02c4da563f1ff5d1ce99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
   agent: {fileID: 0}
   waypoints:
   - {fileID: 1638339077}
   - {fileID: 361336618}
   - {fileID: 739627374}
   - {fileID: 1901440163}
+  player: {fileID: 1975547491}
+  health: 100
+  cooldownTime: 5
+  sightRange: 5
+  attackRange: 1
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  onCooldown: 0
 --- !u!195 &1483945849
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9995,7 +10006,7 @@ GameObject:
   - component: {fileID: 1975547495}
   - component: {fileID: 1975547492}
   - component: {fileID: 1975547494}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

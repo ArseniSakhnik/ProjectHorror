@@ -6,11 +6,19 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    public LayerMask whatIsPlayer;
+
+
+
     public NavMeshAgent agent;
     public Transform[] waypoints;
+    public GameObject player;
     int waypointIndex;
     Vector3 target;
+    public int health = 100;
 
+    public float cooldownTime = 0, sightRange, attackRange;
+    public bool playerInSightRange, playerInAttackRange, onCooldown = false;
 
 
 
@@ -24,12 +32,41 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, target) < 1)
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        if (cooldownTime < 10 && !playerInSightRange)
+        {
+            cooldownTime += Time.deltaTime;
+        }
+        else onCooldown = false;
+
+        if (!playerInSightRange) Patroling();
+        else if (playerInSightRange && !onCooldown) Chase();
+    }
+
+
+    private void Chase()
+    {
+        agent.SetDestination(player.transform.position);
+        if (cooldownTime > 0)
+        {
+            cooldownTime = cooldownTime - Time.deltaTime;
+        }
+        if (cooldownTime <= 5)
+        {
+            onCooldown = true;
+            IteratorWaypointIndex();
+            UpdateDestination();
+        }
+
+    }
+
+    private void Patroling()
+    {
+        if (Vector3.Distance(transform.position, target) < 1)
         {
             IteratorWaypointIndex();
             UpdateDestination();
         }
-    
     }
 
     void UpdateDestination()
@@ -47,14 +84,10 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void Patroling()
-    {
-
-    }
-
 
     private void OnDrawGizmosSelected()
     {
-
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }
