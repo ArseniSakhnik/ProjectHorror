@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,13 +19,29 @@ public class WeaponScript : MonoBehaviour
     public float reloadTime;
     public bool reloading;
 
+    [Header("Данные о местоположении")]
+    public float defaultX;
+    public float defaultY;
+    public float defaultZ;
+    public float targetX;
+    public float targetY;
+    public float targetZ;
 
+    [Header("Состояния")]
+    public bool onRecoil;
+    public bool onZoom;
 
 
     float timeSinceLastShot;
 
     private void Start()
     {
+        defaultX = transform.localPosition.x;
+        defaultY = transform.localPosition.y;
+        defaultZ = transform.localPosition.z;
+
+
+
         GunInput.shootInput += Shoot;
         GunInput.reloadInput += StartReload;
     }
@@ -73,10 +90,22 @@ public class WeaponScript : MonoBehaviour
     {
         timeSinceLastShot += Time.deltaTime;
 
+        if (onRecoil)
+        {
+
+        }
+        else onRecoil = false;
         Debug.DrawRay(cam.position, cam.forward * maxDistance);
     }
 
-    private void OnGunShot() {
+    private void OnGunShot()
+    {
+        onRecoil = true;
+    }
+
+    private void Recoil()
+    {
 
     }
+
 }
