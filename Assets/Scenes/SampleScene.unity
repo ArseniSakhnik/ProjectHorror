@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.018744525, g: 0.022039905, b: 0.02824659, a: 1}
+  m_IndirectSpecularColor: {r: 0.018744495, g: 0.022039877, b: 0.028246542, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2966,7 +2966,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27304
+  m_Name: pb_Mesh24476
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3258,6 +3258,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152202494}
   m_CullTransparentMesh: 1
+--- !u!1 &1181742620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181742621}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1181742621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181742620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 543450652408812299}
+  m_Father: {fileID: 2128136524}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1216658162
 GameObject:
   m_ObjectHideFlags: 0
@@ -10063,6 +10095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d473df863bc074844b1a301c5b8edfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hand: {fileID: 1181742620}
   playerHealth: 100
   inventory: {fileID: 1975547495}
   playerCamera: {fileID: 770238915}
@@ -15043,7 +15076,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 543450652408812299}
+  - {fileID: 1181742621}
   m_Father: {fileID: 1975547493}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15269,7 +15302,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.119937986, z: 0.119937986}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 2128136524}
+  m_Father: {fileID: 1181742621}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &826916669770076519

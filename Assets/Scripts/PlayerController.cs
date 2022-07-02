@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static bool isblockInteraction = false;
     [SerializeField] public static bool isblockReading = false;
 
+    [SerializeField] public GameObject hand;
 
+    [Header("Параметры")]
     [SerializeField] public int playerHealth = 100; // health will not exceed 100
 
     [SerializeField] public Inventory inventory; // field for inventory
@@ -139,10 +141,12 @@ public class PlayerController : MonoBehaviour
             defaultYPos + Mathf.Sin(timer / 4) * walkBobAmount,
             playerCamera.transform.localPosition.z);
             playerCamera.transform.localPosition = target;
+            hand.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, playerCamera.transform.localPosition.y - 1, playerCamera.transform.localPosition.z);
+
         }
 
 
-       else if (isMoving)
+        else if (isMoving)
         {
             timer += Time.deltaTime * (IsCrouching ? crouchBobSpeed : isSprinted ? sprintBobSpeed : walkBobSpeed);
             playerCamera.transform.localPosition = new Vector3(
@@ -152,6 +156,7 @@ public class PlayerController : MonoBehaviour
                     isSprinted ? sprintBobAmount * 4 : walkBobAmount * 3),
                 playerCamera.transform.localPosition.z);
             bobcooldown = 0;
+            hand.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, playerCamera.transform.localPosition.y - 1, playerCamera.transform.localPosition.z);
         }
 
 
@@ -164,6 +169,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(defaultXPos, defaultYPos, 0), walkBobSpeed * Time.deltaTime);
+            hand.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, playerCamera.transform.localPosition.y - 1, playerCamera.transform.localPosition.z);
         };
     }
 
