@@ -7,7 +7,6 @@ public class WeaponSway : MonoBehaviour
     [Header("Sway Settings")]
     public float smooth;
     public float swayMultiplayer;
-    public GameObject camera;
 
     private void Update()
     {

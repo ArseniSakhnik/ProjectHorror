@@ -10003,6 +10003,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1975547493}
+  - component: {fileID: 1975547496}
   - component: {fileID: 1975547495}
   - component: {fileID: 1975547492}
   - component: {fileID: 1975547494}
@@ -10111,6 +10112,19 @@ MonoBehaviour:
   notesItems: []
   NOTEUI: {fileID: 1730291044}
   pgc: 0
+--- !u!114 &1975547496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975547491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6adeb2f821bb9e438a333ae9ee36066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reloadKey: 114
 --- !u!1 &2037801236
 GameObject:
   m_ObjectHideFlags: 0
@@ -15251,7 +15265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148206160305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.29, y: -0.84, z: 1.9100037}
+  m_LocalPosition: {x: 1.29, y: -0.84000015, z: 1.9100037}
   m_LocalScale: {x: 0.1, y: 0.119937986, z: 0.119937986}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -15294,9 +15308,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652408812299}
+  - component: {fileID: 3469287838540307632}
+  - component: {fileID: 3469287838540307631}
   - component: {fileID: 3469287838540307630}
   - component: {fileID: 1711813854747945060}
-  - component: {fileID: 3469287838540307631}
   m_Layer: 7
   m_Name: Nagan
   m_TagString: Untagged
@@ -15582,7 +15597,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smooth: 8
   swayMultiplayer: 6
-  camera: {fileID: 770238914}
+--- !u!114 &3469287838540307632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148206160305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa28aa776782344b9e25e696f808f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2128136524}
+  damage: 10
+  maxDistance: 100
+  currentAmmo: 10
+  magSize: 15
+  fireRate: 100
+  reloadTime: 2
+  reloading: 0
 --- !u!1 &4007578517159134328
 GameObject:
   m_ObjectHideFlags: 0
