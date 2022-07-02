@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.018744495, g: 0.022039877, b: 0.028246542, a: 1}
+  m_IndirectSpecularColor: {r: 0.018744525, g: 0.022039905, b: 0.02824659, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2966,7 +2966,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24476
+  m_Name: pb_Mesh24136
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15642,7 +15642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa28aa776782344b9e25e696f808f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 2128136524}
+  cam: {fileID: 770238915}
   damage: 10
   maxDistance: 100
   currentAmmo: 10
@@ -15650,6 +15650,15 @@ MonoBehaviour:
   fireRate: 100
   reloadTime: 2
   reloading: 0
+  defaultX: 0
+  defaultY: 0
+  defaultZ: 0
+  targetX: 0
+  targetY: 0
+  targetZ: 0
+  onRecoil: 0
+  onZoom: 0
+  timer: 0
 --- !u!1 &4007578517159134328
 GameObject:
   m_ObjectHideFlags: 0

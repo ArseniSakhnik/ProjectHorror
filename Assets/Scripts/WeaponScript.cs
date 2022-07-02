@@ -31,6 +31,9 @@ public class WeaponScript : MonoBehaviour
     public bool onRecoil;
     public bool onZoom;
 
+    public float timer;
+
+
 
     float timeSinceLastShot;
 
@@ -77,35 +80,28 @@ public class WeaponScript : MonoBehaviour
                 {
                     Debug.Log("Попал");
                 }
-                Debug.Log("Выстрелил");
-
                 currentAmmo--;
                 timeSinceLastShot = 0;
                 OnGunShot();
             }
         }
     }
-
+     
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
 
-        if (onRecoil)
-        {
-
-        }
-        else onRecoil = false;
         Debug.DrawRay(cam.position, cam.forward * maxDistance);
     }
 
     private void OnGunShot()
     {
-        onRecoil = true;
+        Recoil();
     }
 
     private void Recoil()
     {
-
+        transform.localRotation = Quaternion.Euler(transform.rotation.x - 20, transform.rotation.y+10, transform.rotation.z);
     }
 
 }
