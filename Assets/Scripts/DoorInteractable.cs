@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoorInteractable : Interactable
 {
     [SerializeField] private bool IsOpen = false;
-    [SerializeField] private bool NeedKey = false;
+    [SerializeField] public bool NeedKey = false;
     [SerializeField] private float dot;
     [SerializeField] private PlayerController ctr;
     [SerializeField] private Item key;
@@ -48,7 +48,6 @@ public class DoorInteractable : Interactable
         }
 
     }
-
 
 
     public override void OnLoseFocus()

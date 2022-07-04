@@ -79,6 +79,20 @@ public class WeaponScript : MonoBehaviour
                 if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, maxDistance))
                 {
                     Debug.Log("Попал");
+                    if (hitInfo.collider.tag == "DoorLock")
+                    {
+
+                        GameObject door = hitInfo.collider.transform.parent.gameObject;
+
+                        door.GetComponent<DoorInteractable>().NeedKey = false;
+                        
+                        Debug.Log("Попал в замок");
+                        Debug.Log("Замок открылся");
+                        hitInfo.rigidbody.useGravity = true;
+                        hitInfo.rigidbody.isKinematic = false;
+                        StartCoroutine(LockDestroy(hitInfo));
+                    
+                    }
                 }
                 currentAmmo--;
                 timeSinceLastShot = 0;
@@ -87,6 +101,13 @@ public class WeaponScript : MonoBehaviour
         }
     }
      
+    public IEnumerator LockDestroy(RaycastHit hitInfo)
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(hitInfo.collider.gameObject);
+    }
+
+
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
