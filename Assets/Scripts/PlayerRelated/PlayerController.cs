@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("—Œ—“ŒﬂÕ»ﬂ")]
+    [SerializeField] public static bool isblockShooting = false;
     [SerializeField] public static bool isblockInventory = false;
     [SerializeField] public static bool isblockInteraction = false;
     [SerializeField] public static bool isblockReading = false;

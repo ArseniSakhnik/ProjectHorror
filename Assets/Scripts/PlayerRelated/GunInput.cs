@@ -12,6 +12,8 @@ public class GunInput : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerController.isblockShooting == true) return;
+
         if (Input.GetMouseButton(0))
             shootInput?.Invoke();
 
