@@ -35,7 +35,7 @@ public class UIRiddleNum : MonoBehaviour
         if (currentString == solution)
         {
             GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "Opened";
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1000);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 2000, transform.position.z);
             parentObject.SetActive(false);
             if (doorToOpen.TryGetComponent(out LockerDoorInteractable locker))
             {
@@ -64,7 +64,7 @@ public class UIRiddleNum : MonoBehaviour
         {
             GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "";
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1000);
+        transform.position = new Vector3(transform.position.x, transform.position.y + 2000, transform.position.z);
         gameObject.SetActive(false);
     }
 
