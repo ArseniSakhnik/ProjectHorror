@@ -8,6 +8,9 @@ public class LockerDoorInteractable : Interactable
     public bool isOpen = false, dir = false;
     public float t, zAngle = 120, angel;
     public Transform defTransf;
+    public Item keyItem;
+    public bool needKey;
+    private PlayerController ctr;
 
     public override void OnFocus()
     {
@@ -15,8 +18,28 @@ public class LockerDoorInteractable : Interactable
 
     public override void OnInteract()
     {
-        if (!isOpen) StartCoroutine(Opening());
-        else StartCoroutine(Closig());
+        ctr = GameObject.Find("Player").GetComponent<PlayerController>();
+
+
+        if (needKey == false)
+        {
+            if (!isOpen) StartCoroutine(Opening());
+            else StartCoroutine(Closig());
+        }
+
+        else if (ctr.inventory.CheckItem(keyItem) && needKey)
+        {
+            Debug.Log("Door Unlocked");
+            ctr.inventory.RemoveItem(keyItem);
+            needKey = false;
+        }
+
+        else
+        {
+            Debug.Log("Door is loocked");
+        }
+
+
     }
 
     IEnumerator Closig()
@@ -66,10 +89,6 @@ public class LockerDoorInteractable : Interactable
                 yield return null;
             }
         }
-
-
-
-        print("Buu");
         isOpen = true;
         t = 0;
         yield return null;
@@ -79,11 +98,6 @@ public class LockerDoorInteractable : Interactable
 
     public override void OnLoseFocus()
     {
-    }
-
-    private void Update()
-    {
-        angel = transform.localEulerAngles.y;
     }
 
     void Start()

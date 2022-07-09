@@ -6,6 +6,7 @@ public class RiddleNumLock : Interactable
 {
     public GameObject RiddleUI;
     public string solution;
+    public GameObject targetDoor;
 
 
 

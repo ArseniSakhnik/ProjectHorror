@@ -8,12 +8,14 @@ public class UIRiddleNum : MonoBehaviour
     public string solution;
     public string currentString;
     public GameObject parentObject;
+    public GameObject doorToOpen;
     // Start is called before the first frame update
     
     public void SetParentData(GameObject parent)
     {
         parentObject = parent;
         solution = parentObject.GetComponent<RiddleNumLock>().solution;
+        doorToOpen = parentObject.GetComponent<RiddleNumLock>().targetDoor;
         foreach (var item in text)
         {
             item.text = "0";
@@ -35,6 +37,14 @@ public class UIRiddleNum : MonoBehaviour
             GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "Opened";
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1000);
             parentObject.SetActive(false);
+            if (doorToOpen.TryGetComponent(out LockerDoorInteractable locker))
+            {
+                locker.needKey = false;
+            }
+            else if (doorToOpen.TryGetComponent(out DoorInteractable door))
+            {
+                door.NeedKey = false;
+            }
             StartCoroutine(ExecuteAfterTime(3));
         }
     }
