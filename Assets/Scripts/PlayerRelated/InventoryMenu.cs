@@ -5,23 +5,28 @@ using UnityEngine;
 public class InventoryMenu : MonoBehaviour
 {
     public GameObject IntentoryUI;
-    public GameObject NotesUI;
     bool isMenuInventory = false;
     bool isMenuNotes = false;
     [SerializeField] private PlayerController ctr;
     [SerializeField] private Inventory inventory;
+    [SerializeField] GameObject useButton;
     [SerializeField] GameObject centerImage;
     [SerializeField] GameObject centerImageName;
     [SerializeField] GameObject centerImageDescr;
     [SerializeField] GameObject centerImageAmount;
     [SerializeField] GameObject nextImage;
     [SerializeField] GameObject prevImage;
+
+
     [SerializeField] private int maxCells;
     [SerializeField] private int centralcell;
     [SerializeField] private int nextcell;
     [SerializeField] private int prevcell;
+
+
     [SerializeField] private Item currentItem;
     [SerializeField] GameObject AmountText;
+    [SerializeField] GameObject AmountValue;
     [SerializeField] List<Item> itemList;
 
 
@@ -50,7 +55,7 @@ public class InventoryMenu : MonoBehaviour
             prevImage.SetActive(false);
             nextImage.SetActive(false);
             centerImage.SetActive(false);
-            AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+            AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
 
             centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = "";
@@ -58,7 +63,6 @@ public class InventoryMenu : MonoBehaviour
             return;
         }
 
-        AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Количество:";
 
         if (maxCells != itemList.Count)
         {
@@ -73,6 +77,33 @@ public class InventoryMenu : MonoBehaviour
         centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].name;
         centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].Description;
         centerImageAmount.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].Quantity.ToString();
+
+
+        switch (itemList[centralcell].Type)
+        {
+            case ItemType.Weapon:
+                useButton.SetActive(true);
+                AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Ammo";
+                AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = "7";
+                useButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Equip";
+                break;
+            case ItemType.KeyItem:
+                useButton.SetActive(false);
+                AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                break;
+            case ItemType.Note:
+                AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                useButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Read";
+                break;
+            default:
+                AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Amount:";
+                useButton.SetActive(true);
+                useButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Use";
+                break;
+        }
+
 
         if (maxCells != 1)
         {
@@ -144,6 +175,9 @@ public class InventoryMenu : MonoBehaviour
                 }
                 inventory.RemoveItem(itemList[centralcell]);
                 break;
+            case "Ammo":
+                print("Reload");
+                break;
 
             default:
                 break;
@@ -197,6 +231,7 @@ public class InventoryMenu : MonoBehaviour
         {
             PlayerController.isblockInteraction = true;
             PlayerController.isblockReading = true;
+            PlayerController.isblockShooting = true;
             RefreshInventory();
             if (isMenuNotes == false)
             {
@@ -224,6 +259,7 @@ public class InventoryMenu : MonoBehaviour
             Time.timeScale = 1f;
             PlayerController.isblockInteraction = false;
             PlayerController.isblockReading = false;
+            PlayerController.isblockShooting = false;
 
         }
     }
