@@ -80,16 +80,12 @@ public class WeaponScript : MonoBehaviour
                 {
                     Debug.Log("Попал");
                     if (hitInfo.collider.tag == "DoorLock")
-                    {
-
-                        GameObject door = hitInfo.collider.transform.parent.gameObject;
-
-                        door.GetComponent<DoorInteractable>().NeedKey = false;
-                        
+                    {                        
                         Debug.Log("Попал в замок");
                         Debug.Log("Замок открылся");
                         hitInfo.rigidbody.useGravity = true;
                         hitInfo.rigidbody.isKinematic = false;
+                        hitInfo.collider.GetComponent<DestroyableLock>().LockLogic();
                         StartCoroutine(LockDestroy(hitInfo));
                     
                     }
