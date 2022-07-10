@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17f803724be2e8443a5a53d23026b6d0, type: 3}
-  m_Name: HealthDrink
+  m_Name: Nagan
   m_EditorClassIdentifier: 
-  Name: Health Drink
-  Description: Herb-based medice, that help recover from small wounds.
-  Quantity: 1
-  Type: 0
+  Name: Nagan
+  Description: Old rusty revolver. Better than nothing.
+  Quantity: 0
+  Type: 4
   File: {fileID: 0}
-  Icon: {fileID: 21300000, guid: 02f5fe0ac200c3940b572fcbfaee2baa, type: 3}
+  Icon: {fileID: 21300000, guid: 4d7e16fe887cb5a41b1840dd50697757, type: 3}

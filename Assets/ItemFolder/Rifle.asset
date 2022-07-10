@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f803724be2e8443a5a53d23026b6d0, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  Name: Rifle
-  Description: Old Grandfather's Rifle. It's the 3-line rifle M1891/
-  Quantity: 1
+  Name: Mosin Rifle
+  Description: Old Grandfather's Rifle. It's the 3-line rifle M1891.
+  Quantity: 0
   Type: 4
+  File: {fileID: 0}
   Icon: {fileID: 21300000, guid: 4ff2bbd3d2b563b4fabc15eac2ea0616, type: 3}

@@ -7,9 +7,26 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] public List<Item> inventoryItems = new();
     [SerializeField] public List<Item> notesItems = new();
+    [SerializeField] public List<GameObject> Weapons = new();
     [SerializeField] public GameObject NOTEUI;
     [SerializeField] public int pgc;
 
+
+
+
+   public void SetWeapon(string WeaponName)
+    {
+        if (WeaponName == "Mosin Rifle")
+        {
+            Weapons[0].SetActive(!Weapons[0].activeInHierarchy);
+            Weapons[1].SetActive(false);
+        }
+        else if(WeaponName == "Nagan")
+        {
+            Weapons[1].SetActive(!Weapons[1].activeInHierarchy);
+            Weapons[0].SetActive(false);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +71,7 @@ public class Inventory : MonoBehaviour
         Time.timeScale = 1f;
         PlayerController.isblockInventory = false;
         PlayerController.isblockInteraction = false;
+        PlayerController.isblockShooting = false;
 
     }
 
@@ -69,6 +87,7 @@ public class Inventory : MonoBehaviour
         Time.timeScale = 0f;
         PlayerController.isblockInventory = true;
         PlayerController.isblockInteraction = true;
+        PlayerController.isblockShooting = true;
         StartCoroutine(ExitFromReading());
         Debug.Log(item);
 

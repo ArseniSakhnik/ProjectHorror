@@ -74,7 +74,7 @@ public class InventoryMenu : MonoBehaviour
 
 
         centerImage.GetComponent<UnityEngine.UI.Image>().sprite = itemList[centralcell].Icon; // set images
-        centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].name;
+        centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].Name;
         centerImageDescr.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].Description;
         centerImageAmount.GetComponent<TMPro.TextMeshProUGUI>().text = itemList[centralcell].Quantity.ToString();
 
@@ -167,7 +167,7 @@ public class InventoryMenu : MonoBehaviour
 
         switch (centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text)
         {
-            case "HealthDrink":                         // drink to restore health
+            case "Health Drink":                         // drink to restore health
                 ctr.playerHealth += 40;
                 if (ctr.playerHealth > 100)
                 {
@@ -177,6 +177,12 @@ public class InventoryMenu : MonoBehaviour
                 break;
             case "Ammo":
                 print("Reload");
+                break;
+            case "Mosin Rifle":
+                inventory.SetWeapon("Mosin Rifle");
+                break;
+            case "Nagan":
+                inventory.SetWeapon("Nagan");
                 break;
 
             default:

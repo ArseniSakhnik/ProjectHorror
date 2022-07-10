@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Bullets
   m_EditorClassIdentifier: 
   Name: Riffle Ammo
-  Description: Description
+  Description: Ammo for rifle
   Quantity: 1
   Type: 0
+  File: {fileID: 0}
   Icon: {fileID: 21300000, guid: e5326e692d2fa1a43a8c5391af100f3a, type: 3}
