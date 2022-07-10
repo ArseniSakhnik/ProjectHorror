@@ -13,8 +13,22 @@ public class Inventory : MonoBehaviour
 
 
 
+    [SerializeField] List<Item> allObjects = new();     // to-do реализовать стирание
 
-   public void SetWeapon(string WeaponName)
+    public string GetInfoAmmo(string WeaponName)
+    {
+        if (WeaponName == "Mosin Rifle")
+        {
+            return Weapons[0].GetComponent<WeaponScript>().currentAmmo + " / " + Weapons[0].GetComponent<WeaponScript>().magSize;
+        }
+        else if(WeaponName == "Nagan")
+        {
+            return Weapons[1].GetComponent<WeaponScript>().currentAmmo + " / " + Weapons[1].GetComponent<WeaponScript>().magSize;
+        }
+        return "0";
+    }
+
+    public void SetWeapon(string WeaponName)
     {
         if (WeaponName == "Mosin Rifle")
         {
@@ -26,6 +40,12 @@ public class Inventory : MonoBehaviour
             Weapons[1].SetActive(!Weapons[1].activeInHierarchy);
             Weapons[0].SetActive(false);
         }
+        var obj1 = Weapons[0];
+        var obj2 = Weapons[1];
+        print("ВИНТОВКА "+obj1.GetComponent<WeaponScript>().currentAmmo + " / " + obj1.GetComponent<WeaponScript>().magSize);
+
+        print("НАГАН "+obj2.GetComponent<WeaponScript>().currentAmmo + " / " + obj2.GetComponent<WeaponScript>().magSize);
+
     }
 
     // Start is called before the first frame update

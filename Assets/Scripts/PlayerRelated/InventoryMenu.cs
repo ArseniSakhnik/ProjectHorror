@@ -84,7 +84,7 @@ public class InventoryMenu : MonoBehaviour
             case ItemType.Weapon:
                 useButton.SetActive(true);
                 AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Ammo";
-                AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = "7";
+                AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.GetInfoAmmo(itemList[centralcell].Name);
                 useButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Equip";
                 break;
             case ItemType.KeyItem:

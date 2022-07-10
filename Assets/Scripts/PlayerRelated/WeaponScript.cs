@@ -33,7 +33,7 @@ public class WeaponScript : MonoBehaviour
 
     public float timer;
 
-
+    public bool inHand;
 
     float timeSinceLastShot;
 
