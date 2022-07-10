@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f803724be2e8443a5a53d23026b6d0, type: 3}
+  m_Name: Mosin Bullets
+  m_EditorClassIdentifier: 
+  Name: Riffle Ammo
+  Description: Ammo for rifle
+  Quantity: 7
+  Type: 3
+  File: {fileID: 0}
+  Icon: {fileID: 21300000, guid: e5326e692d2fa1a43a8c5391af100f3a, type: 3}

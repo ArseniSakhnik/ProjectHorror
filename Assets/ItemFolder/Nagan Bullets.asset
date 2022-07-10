@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17f803724be2e8443a5a53d23026b6d0, type: 3}
-  m_Name: Bullets
+  m_Name: Nagan Bullets
   m_EditorClassIdentifier: 
-  Name: Riffle Ammo
-  Description: Ammo for rifle
-  Quantity: 1
-  Type: 0
+  Name: Revolver Ammo
+  Description: Ammo for Nagan Revolver
+  Quantity: 8
+  Type: 3
   File: {fileID: 0}
-  Icon: {fileID: 21300000, guid: e5326e692d2fa1a43a8c5391af100f3a, type: 3}
+  Icon: {fileID: 21300000, guid: db4363cc4debfa247a4b02e1ab6d2069, type: 3}

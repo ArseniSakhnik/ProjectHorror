@@ -31591,7 +31591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1602548214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36233,6 +36233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa28aa776782344b9e25e696f808f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ammo: {fileID: 11400000, guid: 539176d3375432e4b964c69ab9c3e8e9, type: 2}
   cam: {fileID: 770238915}
   damage: 100
   maxDistance: 800
@@ -36250,7 +36251,6 @@ MonoBehaviour:
   onRecoil: 0
   onZoom: 0
   timer: 0
-  inHand: 0
 --- !u!114 &1848265927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37586,6 +37586,7 @@ MonoBehaviour:
   inventoryItems:
   - {fileID: 11400000, guid: 4632561a573cafb4ca9fb1d0aef5216f, type: 2}
   - {fileID: 11400000, guid: 539176d3375432e4b964c69ab9c3e8e9, type: 2}
+  - {fileID: 11400000, guid: f0e4fcc8e46f1c94aba5dca09d321d08, type: 2}
   notesItems: []
   Weapons:
   - {fileID: 919132148427706311}
@@ -57622,6 +57623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa28aa776782344b9e25e696f808f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ammo: {fileID: 11400000, guid: f0e4fcc8e46f1c94aba5dca09d321d08, type: 2}
   cam: {fileID: 770238915}
   damage: 10
   maxDistance: 100
@@ -57639,7 +57641,6 @@ MonoBehaviour:
   onRecoil: 0
   onZoom: 0
   timer: 0
-  inHand: 0
 --- !u!23 &3603116591823222098
 MeshRenderer:
   m_ObjectHideFlags: 0

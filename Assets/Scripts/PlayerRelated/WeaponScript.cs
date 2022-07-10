@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
+
+    private PlayerController ctr;
+    public Item Ammo;
+
     [Header("References")]
     [SerializeField] private Transform cam;
 
@@ -18,7 +22,6 @@ public class WeaponScript : MonoBehaviour
     [Tooltip("In RPM")] public float fireRate;
     public float reloadTime;
     public bool reloading;
-
     [Header("Данные о местоположении")]
     public float defaultX;
     public float defaultY;
@@ -33,16 +36,18 @@ public class WeaponScript : MonoBehaviour
 
     public float timer;
 
-    public bool inHand;
-
     float timeSinceLastShot;
 
     private void Start()
     {
+        ctr = GameObject.Find("Player").GetComponent<PlayerController>();
+
+
+
         defaultX = transform.localPosition.x;
         defaultY = transform.localPosition.y;
         defaultZ = transform.localPosition.z;
-
+        
 
 
         GunInput.shootInput += Shoot;
@@ -53,7 +58,7 @@ public class WeaponScript : MonoBehaviour
 
     public void StartReload()
     {
-        if (!reloading && this.gameObject.activeSelf)
+        if (!reloading && this.gameObject.activeSelf && Ammo.Quantity!=0)
             StartCoroutine(Reload());
     }
 
@@ -63,8 +68,12 @@ public class WeaponScript : MonoBehaviour
 
         yield return new WaitForSeconds(reloadTime);
 
-        currentAmmo = magSize;
 
+        while (currentAmmo != magSize && Ammo.Quantity!=0)
+        {
+            currentAmmo++;
+            ctr.inventory.RemoveItem(Ammo);
+        }
         reloading = false;
     }
 
