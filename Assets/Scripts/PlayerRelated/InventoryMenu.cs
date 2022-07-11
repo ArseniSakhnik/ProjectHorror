@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class InventoryMenu : MonoBehaviour
 {
     public GameObject IntentoryUI;
@@ -47,9 +48,6 @@ public class InventoryMenu : MonoBehaviour
 
     private void RefreshInventory()
     {
-
-
-
         if (itemList.Count == 0 )
         {
             prevImage.SetActive(false);
@@ -86,6 +84,10 @@ public class InventoryMenu : MonoBehaviour
                 AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Ammo";
                 AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = inventory.GetInfoAmmo(itemList[centralcell].Name);
                 useButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Equip";
+                break;
+            case ItemType.Ammo:
+                useButton.SetActive(false);
+                AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "Amount:";
                 break;
             case ItemType.KeyItem:
                 useButton.SetActive(false);
@@ -140,6 +142,8 @@ public class InventoryMenu : MonoBehaviour
         {
             nextcell = 0;
         }
+        FindObjectOfType<AudioManager>().Play("InvSelect");
+
         RefreshInventory();
     }
 
@@ -152,6 +156,8 @@ public class InventoryMenu : MonoBehaviour
         {
             prevcell = maxCells - 1;
         }
+        FindObjectOfType<AudioManager>().Play("InvSelect");
+
         RefreshInventory();
     }
 
@@ -164,6 +170,8 @@ public class InventoryMenu : MonoBehaviour
             IntentoryUI.SetActive(false);
             inventory.ReadNote(itemList[centralcell]);
         }
+
+        
 
         switch (centerImageName.GetComponent<TMPro.TextMeshProUGUI>().text)
         {
@@ -184,10 +192,10 @@ public class InventoryMenu : MonoBehaviour
             case "Nagan":
                 inventory.SetWeapon("Nagan");
                 break;
-
             default:
                 break;
         }
+        FindObjectOfType<AudioManager>().Play("InvConfirm");
         RefreshInventory();
     }
 
@@ -289,6 +297,7 @@ public class InventoryMenu : MonoBehaviour
         itemList = inventory.notesItems;
         isMenuInventory = false;
         isMenuNotes = true;
+        FindObjectOfType<AudioManager>().Play("InvError");
         RefreshInventory();
 
     }

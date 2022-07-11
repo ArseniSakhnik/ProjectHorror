@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PickableItem : Interactable
 {
     [SerializeField] Item item;
     [SerializeField] public PlayerController ctr;
     [SerializeField] public int amount;
- 
+
 
     public override void OnFocus()
     {
@@ -18,8 +19,9 @@ public class PickableItem : Interactable
         GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "Picked Up <color=green>" + item.name + "</color>";
         ctr = GameObject.Find("Player").GetComponent<PlayerController>();
         ctr.inventory.AddItem(item, amount);
-        StartCoroutine(ExecuteAfterTime(3));
-        gameObject.transform.position = new Vector3(0,-100,0);
+        FindObjectOfType<AudioManager>().Play("InvError", gameObject.AddComponent<AudioSource>());
+        //StartCoroutine(ExecuteAfterTime(3));
+        //gameObject.transform.position = new Vector3(0,-100,0);
         if (item.Type == ItemType.Note)
         {
             ctr.inventory.ReadNote(item);
