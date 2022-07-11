@@ -11,6 +11,8 @@ public class LockerDoorInteractable : Interactable
     public Item keyItem;
     public bool needKey;
     private PlayerController ctr;
+    AudioSource source;
+
 
     public override void OnFocus()
     {
@@ -23,12 +25,14 @@ public class LockerDoorInteractable : Interactable
 
         if (needKey == false)
         {
+            FindObjectOfType<AudioManager>().Play("Door Open", source);
             if (!isOpen) StartCoroutine(Opening());
             else StartCoroutine(Closig());
         }
 
         else if (ctr.inventory.CheckItem(keyItem) && needKey)
         {
+            FindObjectOfType<AudioManager>().Play("Use Key", source);
             Debug.Log("Door Unlocked");
             ctr.inventory.RemoveItem(keyItem);
             needKey = false;
@@ -36,6 +40,7 @@ public class LockerDoorInteractable : Interactable
 
         else
         {
+            FindObjectOfType<AudioManager>().Play("Need Key", source);
             Debug.Log("Door is loocked");
         }
 
@@ -44,6 +49,7 @@ public class LockerDoorInteractable : Interactable
 
     IEnumerator Closig()
     {
+
         if (!dir)
         {
             while (transform.localEulerAngles.y > 1)
@@ -103,5 +109,6 @@ public class LockerDoorInteractable : Interactable
     void Start()
     {
         defTransf = transform;
+        source = gameObject.AddComponent<AudioSource>();
     }
 }

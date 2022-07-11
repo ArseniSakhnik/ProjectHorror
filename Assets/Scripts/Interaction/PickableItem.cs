@@ -20,8 +20,8 @@ public class PickableItem : Interactable
         ctr = GameObject.Find("Player").GetComponent<PlayerController>();
         ctr.inventory.AddItem(item, amount);
         FindObjectOfType<AudioManager>().Play("InvError", gameObject.AddComponent<AudioSource>());
-        //StartCoroutine(ExecuteAfterTime(3));
-        //gameObject.transform.position = new Vector3(0,-100,0);
+        StartCoroutine(ExecuteAfterTime(3));
+        gameObject.transform.position = new Vector3(0,-100,0);
         if (item.Type == ItemType.Note)
         {
             ctr.inventory.ReadNote(item);

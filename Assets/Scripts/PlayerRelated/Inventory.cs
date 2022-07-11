@@ -60,6 +60,7 @@ public class Inventory : MonoBehaviour
 
     public IEnumerator ExitFromReading()
     {
+        FindObjectOfType<AudioManager>().Play("Page");
         int currentpage = 1;
 
         while (!Input.GetKeyDown(KeyCode.R))

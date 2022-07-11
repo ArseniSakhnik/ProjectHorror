@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    
+
     public void Play(string soundName, AudioSource source = null)
     {
         Sound s;
@@ -27,11 +30,25 @@ public class AudioManager : MonoBehaviour
 
         if (source != null)                         // если хотим звук от родителя
         {
+
+            source.volume = s.volume;
+            source.pitch = s.pitch;
             source.spatialBlend = 1;
             source.PlayOneShot(s.clip, s.volume);
         }
 
         else s.source.PlayOneShot(s.clip, s.volume);
+    }
+
+    public IEnumerator DestroyAfterPlay(float time, AudioSource source)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(source);
+    }
+
+    private void Update()
+    {
+        
     }
 
 }

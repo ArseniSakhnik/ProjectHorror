@@ -97,6 +97,7 @@ public class InventoryMenu : MonoBehaviour
             case ItemType.Note:
                 AmountValue.GetComponent<TMPro.TextMeshProUGUI>().text = "";
                 AmountText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                useButton.SetActive(true);
                 useButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Read";
                 break;
             default:
@@ -182,20 +183,19 @@ public class InventoryMenu : MonoBehaviour
                     ctr.playerHealth = 100;
                 }
                 inventory.RemoveItem(itemList[centralcell]);
-                break;
-            case "Ammo":
-                print("Reload");
+                FindObjectOfType<AudioManager>().Play("InvConfirm");
                 break;
             case "Mosin Rifle":
                 inventory.SetWeapon("Mosin Rifle");
+                FindObjectOfType<AudioManager>().Play("InvConfirm");
                 break;
             case "Nagan":
                 inventory.SetWeapon("Nagan");
+                FindObjectOfType<AudioManager>().Play("InvConfirm");
                 break;
             default:
                 break;
         }
-        FindObjectOfType<AudioManager>().Play("InvConfirm");
         RefreshInventory();
     }
 
@@ -283,12 +283,14 @@ public class InventoryMenu : MonoBehaviour
     {
         isMenuInventory = false;
         isMenuNotes = false;
+        FindObjectOfType<AudioManager>().Play("InvError");
     }
     public void SetInventory()
     {
         itemList = inventory.inventoryItems;
         isMenuInventory = true;
         isMenuNotes = false;
+        FindObjectOfType<AudioManager>().Play("InvError");
         RefreshInventory();
 
     }

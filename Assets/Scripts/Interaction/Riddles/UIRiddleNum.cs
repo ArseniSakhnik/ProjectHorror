@@ -58,6 +58,8 @@ public class UIRiddleNum : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1f;
+        FindObjectOfType<AudioManager>().Play("Use Key");
+        FindObjectOfType<AudioManager>().Play("InvError");
 
         yield return new WaitForSeconds(timeInSec);
         if (GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text == "Opened")
@@ -79,6 +81,7 @@ public class UIRiddleNum : MonoBehaviour
         }
         else curNum--;
         textfield.GetComponent<TMPro.TextMeshProUGUI>().text = curNum.ToString();
+        FindObjectOfType<AudioManager>().Play("InvError");
         CheckSolution();
     }
 
@@ -91,6 +94,7 @@ public class UIRiddleNum : MonoBehaviour
         }
         else curNum++;
         textfield.GetComponent<TMPro.TextMeshProUGUI>().text = curNum.ToString();
+        FindObjectOfType<AudioManager>().Play("InvError");
         CheckSolution();
     }
 

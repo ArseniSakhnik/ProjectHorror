@@ -10,10 +10,12 @@ public class DoorInteractable : Interactable
     [SerializeField] private PlayerController ctr;
     [SerializeField] private Item key;
     private Animator anim;
+    AudioSource source;
 
     private void Start()
     {
        anim = GetComponent<Animator>();
+       source = gameObject.AddComponent<AudioSource>();
     }
 
     public override void OnFocus()
@@ -33,11 +35,12 @@ public class DoorInteractable : Interactable
            
             anim.SetFloat("dot", dot);
             anim.SetBool("isOpen", IsOpen);
+            FindObjectOfType<AudioManager>().Play("Door Open", source);
         }
 
         else if (ctr.inventory.CheckItem(key) && NeedKey)
         {
-            Debug.Log("Door Unlocked");
+            FindObjectOfType<AudioManager>().Play("Use Key", source);
             ctr.inventory.RemoveItem(key);
             NeedKey = false;
         }
@@ -45,6 +48,7 @@ public class DoorInteractable : Interactable
         else
         {
             Debug.Log("Door is loocked");
+            FindObjectOfType<AudioManager>().Play("Need Key", source);
         }
 
     }
