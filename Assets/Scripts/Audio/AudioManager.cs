@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.loop = s.loopable;
         }
     }
 
@@ -40,15 +41,17 @@ public class AudioManager : MonoBehaviour
         else s.source.PlayOneShot(s.clip, s.volume);
     }
 
-    public IEnumerator DestroyAfterPlay(float time, AudioSource source)
+    public void PlayWalkSound(string material)
     {
-        yield return new WaitForSeconds(time);
-        Destroy(source);
-    }
+        int rand = UnityEngine.Random.Range(1, 3);
+        Sound s;
+        s = Array.Find(sounds, snd => snd.name == material  + rand);
+        if (s==null)
+        {
+            print("ŒÔÔ‡");
+        }
+        s.source.PlayOneShot(s.clip, s.volume);
 
-    private void Update()
-    {
-        
     }
 
 }

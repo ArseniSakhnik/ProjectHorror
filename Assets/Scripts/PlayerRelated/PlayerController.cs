@@ -55,6 +55,12 @@ public class PlayerController : MonoBehaviour
     [Header("Параметры света")]
     [SerializeField] private bool risingLight = false;
 
+    [Header("Параметры звука шагов")]
+    [SerializeField] private float baseStepSpeed = 0.5f;
+    [SerializeField] private float crouchStepMultipler = 1.5f;
+    [SerializeField] private float sprintStepMultipler = 0.7f;
+    [SerializeField] private float footstepTimer = 0f;
+    [SerializeField] private float GetCurrentOfstet => crouchmode ? baseStepSpeed * crouchStepMultipler: isSprinted ? baseStepSpeed * sprintStepMultipler : baseStepSpeed;
 
     private float cameraPitch;
 
@@ -98,9 +104,44 @@ public class PlayerController : MonoBehaviour
         HandleCrouch();
         Headbobhandler();
         UpdateMovement();
+        HandleFootsteps();
         FlashlightHandler();
-
     }
+
+
+    private void HandleFootsteps()
+    {
+        if (!controller.isGrounded)
+        {
+            return;
+        }
+
+        if (!isMoving)
+        {
+            return;
+        }
+        footstepTimer -= Time.deltaTime;
+
+        if (footstepTimer<=0)
+        {
+            footstepTimer = GetCurrentOfstet;
+
+            if (Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            {
+                switch (hit.collider.tag)
+                {
+                    case "WoodMat":
+                        //FindObjectOfType<AudioManager>().PlayWalkSound("FootSnow");
+                        break;
+                    default:
+                        FindObjectOfType<AudioManager>().PlayWalkSound("FootSnow");
+                        break;
+                }
+            }
+        }
+    }
+
+
 
     private void FlashlightHandler()
     {
