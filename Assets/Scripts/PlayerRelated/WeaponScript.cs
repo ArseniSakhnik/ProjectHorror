@@ -36,6 +36,8 @@ public class WeaponScript : MonoBehaviour
 
     public float timer;
 
+    public bool ondelay = false;
+
     float timeSinceLastShot;
 
     private void Start()
@@ -66,6 +68,8 @@ public class WeaponScript : MonoBehaviour
     {
         reloading = true;
 
+        FindObjectOfType<AudioManager>().Play(gameObject.name + "Reload");
+
         yield return new WaitForSeconds(reloadTime);
 
 
@@ -89,14 +93,14 @@ public class WeaponScript : MonoBehaviour
                 {
                     Debug.Log("Попал");
                     if (hitInfo.collider.tag == "DoorLock")
-                    {                        
+                    {
                         Debug.Log("Попал в замок");
                         Debug.Log("Замок открылся");
                         hitInfo.rigidbody.useGravity = true;
                         hitInfo.rigidbody.isKinematic = false;
                         hitInfo.collider.GetComponent<DestroyableLock>().LockLogic();
                         StartCoroutine(LockDestroy(hitInfo));
-                    
+
                     }
                 }
                 currentAmmo--;
@@ -104,8 +108,23 @@ public class WeaponScript : MonoBehaviour
                 OnGunShot();
             }
         }
+        else {
+            if (!ondelay)
+            {
+                FindObjectOfType<AudioManager>().Play(gameObject.name + "Empty");
+                ondelay = true;
+                StartCoroutine(WaitDelay());
+            }
+        }
     }
-     
+
+    IEnumerator WaitDelay()
+    {
+        yield return new WaitForSeconds(1);
+        ondelay = false;
+    }
+
+
     public IEnumerator LockDestroy(RaycastHit hitInfo)
     {
         yield return new WaitForSeconds(3);
@@ -123,6 +142,7 @@ public class WeaponScript : MonoBehaviour
     private void OnGunShot()
     {
         Recoil();
+        FindObjectOfType<AudioManager>().Play(gameObject.name + "Shoot", null, true);
     }
 
     private void Recoil()

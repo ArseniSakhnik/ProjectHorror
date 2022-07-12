@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
 
     
 
-    public void Play(string soundName, AudioSource source = null)
+    public void Play(string soundName, AudioSource source = null, bool randomPitch = false)
     {
         Sound s;
 
@@ -33,12 +33,27 @@ public class AudioManager : MonoBehaviour
         {
 
             source.volume = s.volume;
-            source.pitch = s.pitch;
+            if (randomPitch == true)
+            {
+                float rpt = UnityEngine.Random.Range(0.9f, 1.1f);
+                source.pitch = rpt;
+                print("Pitch smenen");
+            }
+            else source.pitch = s.pitch;
             source.spatialBlend = 1;
             source.PlayOneShot(s.clip, s.volume);
         }
 
-        else s.source.PlayOneShot(s.clip, s.volume);
+        else {
+            if (randomPitch == true)
+            {
+                float rpt = UnityEngine.Random.Range(0.9f, 1.1f);
+                s.source.pitch = rpt;
+                print("Pitch smenen");
+            }
+            s.source.PlayOneShot(s.clip, s.volume);
+        }
+
     }
 
     public void PlayWalkSound(string material)

@@ -624,6 +624,42 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loopable: 0
+  - name: NaganShoot
+    clip: {fileID: 8300000, guid: a4c7e8670a6263b4f95f2a489898f15b, type: 3}
+    volume: 0.567
+    pitch: 1
+    source: {fileID: 0}
+    loopable: 0
+  - name: NaganReload
+    clip: {fileID: 8300000, guid: ee90b28a19d31e541a100c74b390974c, type: 3}
+    volume: 0.211
+    pitch: 1
+    source: {fileID: 0}
+    loopable: 0
+  - name: NaganEmpty
+    clip: {fileID: 8300000, guid: 166fd1e3c50e42d4f9c8802133c526aa, type: 3}
+    volume: 0.332
+    pitch: 1
+    source: {fileID: 0}
+    loopable: 0
+  - name: MosinShoot
+    clip: {fileID: 8300000, guid: a6f3dfc791e6c5c469d13b2a4f1c7629, type: 3}
+    volume: 0.481
+    pitch: 1
+    source: {fileID: 0}
+    loopable: 0
+  - name: MosinReload
+    clip: {fileID: 8300000, guid: a03f6d8750f364c44b974b6995980e44, type: 3}
+    volume: 0.312
+    pitch: 1
+    source: {fileID: 0}
+    loopable: 0
+  - name: MosinEmpty
+    clip: {fileID: 8300000, guid: 01560a7df011a414bab629a3c81a246a, type: 3}
+    volume: 0.494
+    pitch: 1
+    source: {fileID: 0}
+    loopable: 0
 --- !u!1 &50390234
 GameObject:
   m_ObjectHideFlags: 0
@@ -12153,7 +12189,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24902
+  m_Name: pb_Mesh24906
   serializedVersion: 10
   m_SubMeshes: []
   m_Shapes:
@@ -43774,7 +43810,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24540
+  m_Name: pb_Mesh24542
   serializedVersion: 10
   m_SubMeshes: []
   m_Shapes:
@@ -47915,6 +47951,7 @@ MonoBehaviour:
   onRecoil: 0
   onZoom: 0
   timer: 0
+  ondelay: 0
 --- !u!114 &1848265927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64675,6 +64712,7 @@ MonoBehaviour:
   onRecoil: 0
   onZoom: 0
   timer: 0
+  ondelay: 0
 --- !u!23 &3603116591823222098
 MeshRenderer:
   m_ObjectHideFlags: 0
