@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject InteractIcon;
+    public GameObject Dot;
     [Header("Raycast")]
     [SerializeField] private Vector3 interactionRayPoint = default;
     [SerializeField] private float interactionDistance = 1f;
@@ -26,6 +27,7 @@ public class CameraController : MonoBehaviour
         {
             currentInteractable.OnLoseFocus();
             InteractIcon.SetActive(false);
+            Dot.SetActive(true);
         }
 
         if (Physics.Raycast(cam.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance))
@@ -40,6 +42,7 @@ public class CameraController : MonoBehaviour
                 {
                     currentInteractable.OnFocus();
                     InteractIcon.SetActive(true);
+                    Dot.SetActive(false);
                 }
             }
         }
@@ -48,6 +51,7 @@ public class CameraController : MonoBehaviour
             currentInteractable.OnLoseFocus();
             currentInteractable = null;
             InteractIcon.SetActive(false);
+            Dot.SetActive(true);
         }
 
     }
@@ -58,6 +62,7 @@ public class CameraController : MonoBehaviour
         {
             currentInteractable.OnInteract();
             InteractIcon.SetActive(false);
+            Dot.SetActive(false);
         }
     }
 
