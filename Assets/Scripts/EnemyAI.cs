@@ -16,6 +16,10 @@ public class EnemyAI : MonoBehaviour
     int waypointIndex;
     Vector3 target;
     public int health = 100;
+    public Animator anim;
+
+
+
 
     public float cooldownTime = 0, sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange, onCooldown = false;
@@ -26,6 +30,7 @@ public class EnemyAI : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
         UpdateDestination();
     }
 
@@ -62,6 +67,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Patroling()
     {
+       anim.SetBool("Run", true);
         if (Vector3.Distance(transform.position, target) < 1)
         {
             IteratorWaypointIndex();
@@ -71,6 +77,7 @@ public class EnemyAI : MonoBehaviour
 
     void UpdateDestination()
     {
+        anim.SetBool("Run", false);
         target = waypoints[waypointIndex].position;
         agent.SetDestination(target);
     }
