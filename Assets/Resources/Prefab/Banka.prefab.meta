@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefab/Banka.prefab.meta
 guid: 4752a4c3e3fec9b43ac9d78cc650a47f
+========
+guid: 871c2a6a585d28f4d9df4d0d0453dd63
+>>>>>>>> 6b838f0f0ef5d3892dbe0556fd7f6fe31b3da909:Assets/Resources/Prefab/Kruzka.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

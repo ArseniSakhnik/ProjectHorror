@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefab/Kruzka.prefab.meta
 guid: 871c2a6a585d28f4d9df4d0d0453dd63
+========
+guid: 04d8fd564e430a74890168bde17a7421
+>>>>>>>> 6b838f0f0ef5d3892dbe0556fd7f6fe31b3da909:Assets/Resources/Prefab/TV.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
