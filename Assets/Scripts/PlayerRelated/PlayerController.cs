@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int layr;
     [Header("—Œ—“ŒﬂÕ»ﬂ")]
     [SerializeField] public static bool isblockShooting = false;
     [SerializeField] public static bool isblockInventory = false;
@@ -126,15 +127,18 @@ public class PlayerController : MonoBehaviour
         {
             footstepTimer = GetCurrentOfstet;
 
-            if (Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            layr = LayerMask.GetMask("Player");
+
+            if (Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3, ~layr))
             {
+                Debug.Log("Get Rekt " + hit.collider.name);
                 switch (hit.collider.tag)
                 {
-                    case "WoodMat":
-                        //FindObjectOfType<AudioManager>().PlayWalkSound("FootSnow");
+                    case "SnowMat":
+                        FindObjectOfType<AudioManager>().PlayWalkSound("FootSnow");
                         break;
                     default:
-                        FindObjectOfType<AudioManager>().PlayWalkSound("FootSnow");
+                        FindObjectOfType<AudioManager>().PlayWalkSound("WoodFootStep");
                         break;
                 }
             }
