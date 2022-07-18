@@ -16,7 +16,7 @@ public class PickableItem : Interactable
 
     public override void OnInteract()
     {
-        GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "Picked Up <color=green>" + item.name + "</color>";
+        GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "Picked Up <color=green>" + item.Name + "</color>";
         ctr = GameObject.Find("Player").GetComponent<PlayerController>();
         ctr.inventory.AddItem(item, amount);
         FindObjectOfType<AudioManager>().Play("InvError", gameObject.AddComponent<AudioSource>());
@@ -31,7 +31,7 @@ public class PickableItem : Interactable
     public IEnumerator ExecuteAfterTime(float timeInSec)
     {
         yield return new WaitForSeconds(timeInSec);
-        if (GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text == "Picked Up <color=green>" + item.name + "</color>")
+        if (GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text == "Picked Up <color=green>" + item.Name + "</color>")
         {
             GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "";
         }

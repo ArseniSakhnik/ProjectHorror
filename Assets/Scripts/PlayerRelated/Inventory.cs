@@ -11,6 +11,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] public GameObject NOTEUI;
     [SerializeField] public int pgc;
 
+    public int phase = 0;
+
 
 
     [SerializeField] List<Item> allObjects = new();     // to-do реализовать стирание
@@ -138,6 +140,11 @@ public class Inventory : MonoBehaviour
             inventoryItems.Add(item);
             inventoryItems[inventoryItems.IndexOf(item)].Quantity += amount;
             Debug.Log("Add");
+        }
+
+        if (item.name.Contains("Obereg"))
+        {
+            phase++;
         }
     }
 

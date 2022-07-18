@@ -83,11 +83,11 @@ public class PlayerController : MonoBehaviour
     private float timer;
     private float velocityY;
     public float transparency;
-    
-    IEnumerator DeathHandler()
+
+   public IEnumerator DeathHandler(string text = "You area dead")
     {
         yield return new WaitForSeconds(2);
-        GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "Press E to Restart";
+        GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = text + Environment.NewLine + "Press E to Restart";
 
         while (!Input.GetKeyDown(KeyCode.E))
         {
