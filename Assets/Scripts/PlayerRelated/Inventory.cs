@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
+    [SerializeField] public GameObject[] enemies = new GameObject[3];
     [SerializeField] public List<Item> inventoryItems = new();
     [SerializeField] public List<Item> notesItems = new();
     [SerializeField] public List<GameObject> Weapons = new();
@@ -12,8 +13,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] public int pgc;
 
     public int phase = 0;
+    [SerializeField] public Item fake;
 
-
+    public Material material1, material2;
 
     [SerializeField] List<Item> allObjects = new();     // to-do реализовать стирание
 
@@ -53,11 +55,19 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var item in inventoryItems)
+
+        foreach (var item in allObjects)
         {
-            item.Quantity = 1;
+            item.Quantity = 0;
+            if (item.Type == ItemType.Note)
+            {
+                item.Quantity = 1;
+            }
         }
-    }
+
+        AddItem(fake);
+        ReadNote(fake);
+     }
 
 
     public IEnumerator ExitFromReading()
@@ -126,6 +136,10 @@ public class Inventory : MonoBehaviour
         {
             notesItems.Add(item);
             Debug.Log("+Note");
+            if (item.Name == "Blood Letter")
+            {
+                notesItems.Remove(fake);
+            }
             return;
         }
 
@@ -144,7 +158,26 @@ public class Inventory : MonoBehaviour
 
         if (item.name.Contains("Obereg"))
         {
-            phase++;
+            phaseHandler();
+        }
+    }
+
+    private void phaseHandler()
+    {
+        phase++;
+
+        switch (phase)
+        {
+            case 1:
+                enemies[0].SetActive(true);
+                break;
+            case 2:
+                enemies[1].SetActive(true);
+                break;
+            case 3:
+                enemies[2].SetActive(true);
+                RenderSettings.skybox = material2;
+                break;
         }
     }
 
