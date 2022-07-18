@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17f803724be2e8443a5a53d23026b6d0, type: 3}
-  m_Name: Letter
+  m_Name: NoteFfomHouse
   m_EditorClassIdentifier: 
-  Name: Grandfather's Letter
-  Description: This is why i have come here.
+  Name: Neighbor's note
+  Description: Note written by uncle Arsenyi.
   Quantity: 1
   Type: 1
-  File: {fileID: 4900000, guid: aee101dd463debd44b333dc5d781de03, type: 3}
-  Icon: {fileID: 21300000, guid: 4616162e897346241a126e19a1da02dd, type: 3}
+  File: {fileID: 4900000, guid: 9d01acaf0ca512b479209a72eb61c84b, type: 3}
+  Icon: {fileID: 0}

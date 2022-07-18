@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17f803724be2e8443a5a53d23026b6d0, type: 3}
-  m_Name: Letter 2
+  m_Name: Journal
   m_EditorClassIdentifier: 
-  Name: Sanya Kamen Letter
-  Description: Sanya Kamen need to do
+  Name: Observation Journal
+  Description: My Grandfather's Journal.
   Quantity: 1
   Type: 1
-  File: {fileID: 4900000, guid: b69ff43208b2735428bdce2711d2ef07, type: 3}
+  File: {fileID: 4900000, guid: 1d9d7a0d05e8f3d428f7357f29d412ca, type: 3}
   Icon: {fileID: 21300000, guid: 4616162e897346241a126e19a1da02dd, type: 3}
