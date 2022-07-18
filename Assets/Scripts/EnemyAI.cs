@@ -28,15 +28,15 @@ public class EnemyAI : MonoBehaviour
     IEnumerator Attack()
     {
         //anim.SetBool("Run", false);
-       // anim.SetBool("Attack", true);
         anim.Play("Attack");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         if (playerInAttackRange)
         {
             player.GetComponent<PlayerController>().GetDamage(30);
             cooldownTime = 0;
         }
         duringAttack = false;
+        cooldownTime = 0;
     }
 
 
@@ -56,6 +56,7 @@ public class EnemyAI : MonoBehaviour
         anim.SetBool("Attack", false);
         //anim.SetBool("Dies", true);
         anim.Play("Death");
+        agent.isStopped = true;
     }
 
 
