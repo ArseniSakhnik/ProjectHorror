@@ -13,7 +13,7 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private Transform cam;
 
     [Header("Shooting")]
-    public float damage;
+    public int damage;
     public float maxDistance;
 
     [Header("Reloading")]
@@ -39,6 +39,8 @@ public class WeaponScript : MonoBehaviour
     public bool ondelay = false;
 
     float timeSinceLastShot;
+
+    public GameObject bloodPref;
 
     private void Start()
     {
@@ -91,16 +93,20 @@ public class WeaponScript : MonoBehaviour
             {
                 if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, maxDistance))
                 {
-                    Debug.Log("Попал");
                     if (hitInfo.collider.tag == "DoorLock")
                     {
-                        Debug.Log("Попал в замок");
-                        Debug.Log("Замок открылся");
                         hitInfo.rigidbody.useGravity = true;
                         hitInfo.rigidbody.isKinematic = false;
                         hitInfo.collider.GetComponent<DestroyableLock>().LockLogic();
                         StartCoroutine(LockDestroy(hitInfo));
 
+                    }
+                    else if (hitInfo.collider.tag == "Enemy")
+                    {
+                        print("Popal v wolka");
+                        hitInfo.collider.GetComponent<EnemyAI>().TakeDamage(damage);
+                        var rot = Quaternion.FromToRotation(Vector3.up, hitInfo.normal); 
+                        Instantiate(bloodPref, hitInfo.point, rot);
                     }
                 }
                 currentAmmo--;

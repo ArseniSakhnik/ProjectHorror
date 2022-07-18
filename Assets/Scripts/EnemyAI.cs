@@ -8,22 +8,55 @@ public class EnemyAI : MonoBehaviour
 {
     public LayerMask whatIsPlayer;
 
-
+    public bool isDeath;
 
     public NavMeshAgent agent;
     public Transform[] waypoints;
     public GameObject player;
     int waypointIndex;
     Vector3 target;
-    public int health = 100;
+    public int health;
     public Animator anim;
-
+    
 
 
 
     public float cooldownTime = 0, sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange, onCooldown = false;
+    public bool duringAttack, playerInSightRange, playerInAttackRange, onCooldown = false;
 
+
+    IEnumerator Attack()
+    {
+        //anim.SetBool("Run", false);
+       // anim.SetBool("Attack", true);
+        anim.Play("Attack");
+        yield return new WaitForSeconds(0.5f);
+        if (playerInAttackRange)
+        {
+            player.GetComponent<PlayerController>().GetDamage(30);
+            cooldownTime = 0;
+        }
+        duringAttack = false;
+    }
+
+
+    public void TakeDamage(int damage)
+    {
+        health = health - damage;
+        if (health<=0)
+        {
+            isDeath = true;
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        anim.SetBool("Run", false);
+        anim.SetBool("Attack", false);
+        //anim.SetBool("Dies", true);
+        anim.Play("Death");
+    }
 
 
     // Start is called before the first frame update
@@ -37,20 +70,39 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (duringAttack) return;
+        if (isDeath)
+        {
+            return;
+        }
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        if (cooldownTime < 10 && !playerInSightRange)
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+
+
+        if (cooldownTime < 20 && !playerInSightRange)
         {
             cooldownTime += Time.deltaTime;
         }
         else onCooldown = false;
 
+        if (playerInAttackRange)
+        {
+            StartCoroutine(Attack());
+            duringAttack = true;
+            return;
+        }
+
+
         if (!playerInSightRange) Patroling();
         else if (playerInSightRange && !onCooldown) Chase();
+
     }
 
 
     private void Chase()
     {
+        anim.SetBool("Run", true);
         agent.SetDestination(player.transform.position);
         if (cooldownTime > 0)
         {
@@ -77,7 +129,6 @@ public class EnemyAI : MonoBehaviour
 
     void UpdateDestination()
     {
-        anim.SetBool("Run", false);
         target = waypoints[waypointIndex].position;
         agent.SetDestination(target);
     }
@@ -96,5 +147,7 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

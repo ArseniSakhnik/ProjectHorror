@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static bool isblockInventory = false;
     [SerializeField] public static bool isblockInteraction = false;
     [SerializeField] public static bool isblockReading = false;
+    public bool isDead = false;
 
     [SerializeField] public GameObject hand;
 
@@ -20,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform playerCamera; // camera object
     [SerializeField] private Light flashlight; // camera object
     [SerializeField] private float mouseSensitivity = 3.5f; // sensetivity
+
     [SerializeField] private float walkSpeed = 6.0f; // speed
     [SerializeField] private float gravity = -13.0f; // gravity for fall
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.3f; // smooth moving vector
@@ -61,7 +66,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchStepMultipler = 1.5f;
     [SerializeField] private float sprintStepMultipler = 0.7f;
     [SerializeField] private float footstepTimer = 0f;
-    [SerializeField] private float GetCurrentOfstet => crouchmode ? baseStepSpeed * crouchStepMultipler: isSprinted ? baseStepSpeed * sprintStepMultipler : baseStepSpeed;
+    [SerializeField] private float GetCurrentOfstet => crouchmode ? baseStepSpeed * crouchStepMultipler : isSprinted ? baseStepSpeed * sprintStepMultipler : baseStepSpeed;
 
     private float cameraPitch;
 
@@ -77,6 +82,47 @@ public class PlayerController : MonoBehaviour
     private bool duringCrouchAnimation;
     private float timer;
     private float velocityY;
+    public float transparency;
+    
+    IEnumerator DeathHandler()
+    {
+        yield return new WaitForSeconds(2);
+        GameObject.Find("SubtitlesInfo").GetComponent<TMPro.TextMeshProUGUI>().text = "Press E to Restart";
+
+        while (!Input.GetKeyDown(KeyCode.E))
+        {
+            yield return null;
+        }
+
+        isblockInteraction = false;
+        isblockInventory = false;
+        isblockReading = false;
+        isblockShooting = false;
+        SceneManager.LoadScene(0);
+    }
+
+    public void GetDamage(int damage)
+    {
+        if (isDead)
+        {
+            return;
+        }
+
+        playerHealth = playerHealth - damage;
+        if (playerHealth <= 0)
+        {
+            FindObjectOfType<AudioManager>().Play("PlayerDeath");
+            isblockInteraction = true;
+            isblockInventory = true;
+            isblockReading = true;
+            isblockShooting = true;
+            isDead = true;
+            StartCoroutine(DeathHandler());
+        }
+        FindObjectOfType<AudioManager>().Play("PlayerDamage");
+
+    }
+
 
     public bool IsCrouching =>
         Input.GetKey(KeyCode.LeftControl) && !duringCrouchAnimation &&
@@ -98,6 +144,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isDead)
+        {
+            transparency += Time.deltaTime;
+            GameObject.Find("BlackScreen").GetComponent<RawImage>().color = new Color(0, 0, 0, transparency);
+            return;
+        }
+
+        GameObject.Find("RedScreen").GetComponent<RawImage>().color = new Color(255, 0, 0, 1 - (float)playerHealth/90);
+
+
         if (Time.timeScale !=0f)
         {
             UpdateMouseLook();

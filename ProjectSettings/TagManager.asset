@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DoorLock
   - SnowMat
+  - Enemy
   layers:
   - Default
   - TransparentFX
